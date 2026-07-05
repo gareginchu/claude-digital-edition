@@ -25,3 +25,6 @@ build/
 tei_enriched/
 tei_enriched_*/
 
+# vendored TEI P5 RelaxNG schema (fetched in CI, cached locally)
+odd/schemas/
+

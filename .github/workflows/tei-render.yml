@@ -29,6 +29,9 @@ jobs:
     - name: Enrich TEI with standOff entities
       run: |
         python pipeline/enrich_tei.py tei tei_enriched --start-article 1 --end-article 55
+    - name: Validate TEI against TEI P5 RelaxNG (tei_all)
+      run: |
+        python pipeline/validate_tei.py --fetch tei tei_enriched
     - name: Batch render TEI to HTML
       run: |
         rm -f site/html/article_*.html

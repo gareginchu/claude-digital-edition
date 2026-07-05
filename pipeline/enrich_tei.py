@@ -319,19 +319,25 @@ def enrich_tei_with_standoff(tei_file: str, out_file: str):
     # Create standOff element
     standoff = etree.Element('{%s}standOff' % NS['tei'])
     
-    # Add person list
-    persons = etree.SubElement(standoff, '{%s}listPerson' % NS['tei'])
-    for i, name in enumerate(names, start=1):
-        person = etree.SubElement(persons, '{%s}person' % NS['tei'], id=f'person_{i}')
-        persName = etree.SubElement(person, '{%s}persName' % NS['tei'])
-        persName.text = name
-        persName.set('{http://www.w3.org/XML/1998/namespace}lang', 'hy')
-    
-    # Add manuscript refs
+    XML_ID = '{http://www.w3.org/XML/1998/namespace}id'
+
+    # Add person list (only if we have persons; empty listPerson is invalid).
+    if names:
+        persons = etree.SubElement(standoff, '{%s}listPerson' % NS['tei'])
+        for i, name in enumerate(names, start=1):
+            person = etree.SubElement(persons, '{%s}person' % NS['tei'])
+            person.set(XML_ID, f'person_{i}')
+            persName = etree.SubElement(person, '{%s}persName' % NS['tei'])
+            persName.text = name
+            persName.set('{http://www.w3.org/XML/1998/namespace}lang', 'hy')
+
+    # Add manuscript refs. TEI has no <listMSDesc>; msDesc children live in <listBibl>.
     if ms_refs:
-        msDescs = etree.SubElement(standoff, '{%s}listMSDesc' % NS['tei'])
+        listBibl = etree.SubElement(standoff, '{%s}listBibl' % NS['tei'])
+        listBibl.set('type', 'manuscript-refs')
         for i, ref in enumerate(ms_refs, start=1):
-            msDesc = etree.SubElement(msDescs, '{%s}msDesc' % NS['tei'], id=f'ms_{i}')
+            msDesc = etree.SubElement(listBibl, '{%s}msDesc' % NS['tei'])
+            msDesc.set(XML_ID, f'ms_{i}')
             idno = etree.SubElement(msDesc, '{%s}msIdentifier' % NS['tei'])
             shelfmark = etree.SubElement(idno, '{%s}altIdentifier' % NS['tei'])
             idnoVal = etree.SubElement(shelfmark, '{%s}idno' % NS['tei'])
@@ -340,8 +346,10 @@ def enrich_tei_with_standoff(tei_file: str, out_file: str):
                 note = etree.SubElement(msDesc, '{%s}note' % NS['tei'])
                 ref_elem = etree.SubElement(note, '{%s}ref' % NS['tei'], target=ref['url'])
                 ref_elem.text = ref['text']
-    
-    root.append(standoff)
+
+    # Only append standOff if it has at least one child (empty standOff is invalid).
+    if len(standoff) > 0:
+        root.append(standoff)
     
     # Serialize to string with proper encoding
     xml_str = etree.tostring(root, pretty_print=True, encoding='unicode')

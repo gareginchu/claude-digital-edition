@@ -4,6 +4,7 @@ Defaults to enriching article_001..article_055 and skips back matter files unles
 --include-backmatter is explicitly passed.
 """
 import re
+import unicodedata
 import argparse
 from pathlib import Path
 from typing import List, Dict, Tuple
@@ -153,6 +154,31 @@ def _unique_preserve_order(items: List[str]) -> List[str]:
     return out
 
 
+def _deduplicate_inflected_names(names: List[str]) -> List[str]:
+    """Collapse inflectional variants: keep shortest form when first tokens share a ≥5-char stem."""
+    def stem(tok: str) -> str:
+        return tok[:max(5, len(tok) - 3)]
+
+    groups: List[List[str]] = []
+    for name in names:
+        first = name.split()[0]
+        placed = False
+        for g in groups:
+            rep_first = g[0].split()[0]
+            if stem(first) == stem(rep_first):
+                g.append(name)
+                placed = True
+                break
+        if not placed:
+            groups.append([name])
+
+    result = []
+    for g in groups:
+        canonical = min(g, key=lambda n: len(n))
+        result.append(canonical)
+    return result
+
+
 def _is_non_person_candidate(candidate: str) -> bool:
     if candidate in TOPONYM_BIGRAMS:
         return True
@@ -280,11 +306,14 @@ def enrich_tei_with_standoff(tei_file: str, out_file: str):
     body = root.find('.//tei:body', NS)
     if body is None:
         return
-    
+
     text_content = etree.tostring(body, encoding='unicode', method='text')
-    
+    # NFC-normalise to prevent mixed-script artefacts from PDF extraction
+    text_content = unicodedata.normalize('NFC', text_content)
+
     # Extract entities
-    names = extract_armenian_names(text_content)
+    names_raw = extract_armenian_names(text_content)
+    names = _deduplicate_inflected_names(names_raw)
     ms_refs = detect_manuscript_refs(text_content)
     
     # Create standOff element

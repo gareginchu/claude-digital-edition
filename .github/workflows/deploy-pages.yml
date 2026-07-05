@@ -28,12 +28,13 @@ jobs:
         rm -f pipeline/backmatter/backmatter_*.txt
         python pipeline/split_back_matter.py pipeline/articles/article_056.txt pipeline/backmatter
     
-    - name: Build artifacts (TEI → HTML → RAG → IIIF)
+    - name: Build artifacts (TEI → enrich → HTML → RAG → IIIF)
       run: |
         rm -f tei/article_*.xml
         rm -f site/html/article_*.html
         python pipeline/generate_tei_drafts.py pipeline/articles tei
-        python site/batch_render_tei.py tei site/html site/tei_to_html.py
+        python pipeline/enrich_tei.py tei tei_enriched --start-article 1 --end-article 55
+        python site/batch_render_tei.py tei_enriched site/html site/tei_to_html.py
         python rag/create_rag_index.py tei rag/index.json
         python iiif/create_manifest.py iiif/manifests
     

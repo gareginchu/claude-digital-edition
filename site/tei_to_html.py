@@ -23,7 +23,17 @@ def tei_to_html(tei_path: str, out_path: str):
         "h1 { font-size: 1.8rem; margin-bottom: 0.25rem; } "
         "h2 { font-size: 1.2rem; margin-top: 0; color: #555; } "
         ".meta { color: #666; font-size: 0.95rem; margin-bottom: 1.25rem; } "
-        "p { margin: 0.75rem 0; white-space: pre-wrap; }"
+        "p { margin: 0.75rem 0; white-space: pre-wrap; } "
+        "aside.entities { margin-top: 2rem; border-top: 1px solid #ddd; padding-top: 1rem; "
+        "font-size: 0.9rem; color: #444; } "
+        "aside.entities h3 { font-size: 1rem; margin-bottom: 0.5rem; } "
+        "aside.entities h4 { font-size: 0.9rem; margin: 0.75rem 0 0.25rem; } "
+        "aside.entities ul { list-style: none; padding: 0; margin: 0; } "
+        "aside.entities li { display: inline-block; margin: 0.15rem 0.4rem 0.15rem 0; "
+        "background: #f5f5f5; border-radius: 3px; padding: 0.1rem 0.4rem; } "
+        "aside.entities a { color: #1a6a9a; text-decoration: none; } "
+        "aside.entities a:hover { text-decoration: underline; } "
+        ".unreviewed { color: #999; font-size: 0.8em; }"
     )
     b = etree.SubElement(html_root, 'body')
     main_title = etree.SubElement(b, 'h1')
@@ -42,6 +52,58 @@ def tei_to_html(tei_path: str, out_path: str):
             for p in div.findall('.//tei:p', NS):
                 p_el = etree.SubElement(b, 'p')
                 p_el.text = p.text
+
+    # Render standOff entity panel if present
+    standoff = tree.find('.//tei:standOff', NS)
+    if standoff is not None:
+        persons = standoff.findall('.//tei:listPerson/tei:person', NS)
+        ms_descs = standoff.findall('.//tei:listMSDesc/tei:msDesc', NS)
+        if persons or ms_descs:
+            panel = etree.SubElement(b, 'aside')
+            panel.set('class', 'entities')
+            ph = etree.SubElement(panel, 'h3')
+            ph.text = 'Identified entities'
+            if persons:
+                pl = etree.SubElement(panel, 'ul')
+                pl.set('class', 'persons')
+                for person in persons:
+                    pn = person.find('tei:persName', NS)
+                    if pn is None or not pn.text:
+                        continue
+                    li = etree.SubElement(pl, 'li')
+                    ref = pn.get('ref')
+                    resp = pn.get('resp', '')
+                    if ref:
+                        a = etree.SubElement(li, 'a')
+                        a.set('href', ref)
+                        a.set('target', '_blank')
+                        a.set('rel', 'noopener')
+                        a.text = pn.text.strip()
+                        if 'auto' in resp:
+                            note = etree.SubElement(li, 'span')
+                            note.set('class', 'unreviewed')
+                            note.text = ' (auto, unreviewed)'
+                    else:
+                        li.text = pn.text.strip()
+            if ms_descs:
+                msl = etree.SubElement(panel, 'ul')
+                msl.set('class', 'manuscripts')
+                msh = etree.SubElement(panel, 'h4')
+                msh.text = 'Manuscripts'
+                for msd in ms_descs:
+                    idno = msd.find('.//tei:idno', NS)
+                    ref_el = msd.find('.//tei:ref', NS)
+                    if idno is None or not idno.text:
+                        continue
+                    li = etree.SubElement(msl, 'li')
+                    if ref_el is not None and ref_el.get('target'):
+                        a = etree.SubElement(li, 'a')
+                        a.set('href', ref_el.get('target'))
+                        a.set('target', '_blank')
+                        a.set('rel', 'noopener')
+                        a.text = idno.text.strip()
+                    else:
+                        li.text = idno.text.strip()
     out = Path(out_path)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(etree.tostring(html_root, pretty_print=True, method='html', encoding='unicode'), encoding='utf-8')

@@ -26,10 +26,13 @@ jobs:
       run: |
         rm -f tei/article_*.xml
         python pipeline/generate_tei_drafts.py pipeline/articles tei
+    - name: Enrich TEI with standOff entities
+      run: |
+        python pipeline/enrich_tei.py tei tei_enriched --start-article 1 --end-article 55
     - name: Batch render TEI to HTML
       run: |
         rm -f site/html/article_*.html
-        python site/batch_render_tei.py tei site/html site/tei_to_html.py
+        python site/batch_render_tei.py tei_enriched site/html site/tei_to_html.py
     - name: Build RAG index
       run: |
         python rag/create_rag_index.py tei rag/index.json

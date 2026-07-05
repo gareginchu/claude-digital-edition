@@ -83,6 +83,21 @@ NON_PERSON_TOKENS = {
     'Հաճութեամբ',
     'Աւետարանս',
     'Մուշեղանց',
+    # Liturgical / bibliographic title tokens frequently appearing in
+    # manuscript contents lists (e.g. article_054's colophon-style entries).
+    'Մեղեդի',
+    'Յարութեան',
+    'Յարության',
+    'Շարական',
+    'Շարականի',
+    'Տաղ',
+    'Աղոթք',
+    'Աղոթքի',
+    'Կանոն',
+    'Գովեստի',
+    # Weak surnames-in-genitive that leak from bibliographic entries.
+    'Մատթեոսի',
+    'Չունի',
 }
 
 LANGUAGE_TERMS = {

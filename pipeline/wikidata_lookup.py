@@ -18,7 +18,7 @@ import time
 import argparse
 import unicodedata
 from pathlib import Path
-from typing import Optional
+from typing import List, Optional
 from urllib.parse import quote
 from urllib.request import urlopen, Request
 from urllib.error import URLError
@@ -70,21 +70,40 @@ def _lookup_armenian_person(name: str) -> Optional[str]:
     """Return a Wikidata QID string (e.g. 'Q12345') for a person name, or None."""
     name_nfc = unicodedata.normalize('NFC', name.strip())
     for candidate in _canonical_forms(name_nfc):
-        # Try Armenian label
-        sparql = f"""
+        # Try exact match in Eastern Armenian, Western Armenian, and English labels
+        for lang in ('hy', 'hyw', 'en'):
+            sparql = f"""
 SELECT ?item WHERE {{
   ?item wdt:P31 wd:Q5 .
-  ?item rdfs:label "{candidate}"@hy .
+  ?item rdfs:label "{candidate}"@{lang} .
 }}
 LIMIT 2
 """
-        data = _sparql_query(sparql)
-        if data is None:
-            continue
-        results = data.get('results', {}).get('bindings', [])
-        if len(results) == 1:
-            uri = results[0]['item']['value']
-            return uri.rsplit('/', 1)[-1]
+            data = _sparql_query(sparql)
+            if data is None:
+                continue
+            results = data.get('results', {}).get('bindings', [])
+            if len(results) == 1:
+                uri = results[0]['item']['value']
+                return uri.rsplit('/', 1)[-1]
+        # Fallback: substring search in Armenian labels (handles partial/suffix mismatch)
+        stem = candidate.split()[0] if ' ' in candidate else candidate
+        if len(stem) >= 5:
+            sparql = f"""
+SELECT ?item WHERE {{
+  ?item wdt:P31 wd:Q5 .
+  ?item rdfs:label ?lbl .
+  FILTER(LANG(?lbl) = "hy" && CONTAINS(LCASE(STR(?lbl)), LCASE("{stem}")))
+}}
+LIMIT 2
+"""
+            data = _sparql_query(sparql)
+            if data is None:
+                continue
+            results = data.get('results', {}).get('bindings', [])
+            if len(results) == 1:
+                uri = results[0]['item']['value']
+                return uri.rsplit('/', 1)[-1]
     return None
 
 

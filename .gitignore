@@ -28,3 +28,6 @@ tei_enriched_*/
 # vendored TEI P5 RelaxNG schema (fetched in CI, cached locally)
 odd/schemas/
 
+# Claude Code local state (subagent worktrees, settings)
+.claude/
+

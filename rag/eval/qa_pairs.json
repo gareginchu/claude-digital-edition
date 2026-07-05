@@ -4,91 +4,916 @@
     "question": "Who is the author of the article about the Armenian-Arabic-Persian dictionary?",
     "expected_article": "article_010",
     "expected_contains": "ԲԱՌARARAN",
-    "notes": "Lexicon-style article; tests recall on zero-entity articles"
+    "notes": "Lexicon-style article; tests recall on zero-entity articles",
+    "source": "curated"
   },
   {
     "id": "qa_002",
     "question": "Which articles mention Grigor Narekatsi?",
     "expected_article": "article_037",
-    "notes": "High-frequency historical person spanning multiple articles"
+    "notes": "High-frequency historical person spanning multiple articles",
+    "source": "curated"
   },
   {
     "id": "qa_003",
     "question": "What manuscript is referenced in connection with Gevorg Dpir?",
     "expected_article": "article_008",
     "expected_contains": "Bodleian",
-    "notes": "Tests manuscript reference retrieval"
+    "notes": "Tests manuscript reference retrieval",
+    "source": "curated"
   },
   {
     "id": "qa_004",
     "question": "Which scholar wrote about Movses Khorenatsi and Favstos Buzand?",
     "expected_article": "article_017",
-    "notes": "Tests multi-entity co-occurrence retrieval"
+    "notes": "Tests multi-entity co-occurrence retrieval",
+    "source": "curated"
   },
   {
     "id": "qa_005",
     "question": "What is discussed about Konstantin Erznkatsi's poetry?",
     "expected_article": "article_022",
-    "notes": "Tests person-centric content retrieval"
+    "notes": "Tests person-centric content retrieval",
+    "source": "curated"
   },
   {
     "id": "qa_006",
     "question": "Which articles cover the Mkhitar Sebastatsi and the Mekhitarist order?",
     "expected_article": "article_047",
-    "notes": "Tests institutional/person co-reference"
+    "notes": "Tests institutional/person co-reference",
+    "source": "curated"
   },
   {
     "id": "qa_007",
     "question": "What does the corpus say about Ibn Sina and Armenian medicine?",
     "expected_article": "article_002",
-    "notes": "Tests cross-language name retrieval"
+    "notes": "Tests cross-language name retrieval",
+    "source": "curated"
   },
   {
     "id": "qa_008",
     "question": "Describe the sources cited for Stepanos Taronatsi",
     "expected_article": "article_020",
-    "notes": "Tests bibliographic/citation retrieval"
+    "notes": "Tests bibliographic/citation retrieval",
+    "source": "curated"
   },
   {
     "id": "qa_009",
     "question": "Who is Vahram Pahlavuni and what is his historical role?",
     "expected_article": "article_030",
-    "notes": "Low-recall article — tests abstention behaviour"
+    "notes": "Low-recall article — tests abstention behaviour",
+    "source": "curated"
   },
   {
     "id": "qa_010",
     "question": "What year was the Chookaszian volume published?",
     "expected_article": null,
-    "notes": "Out-of-scope question — tests abstention (answer not in corpus)"
+    "notes": "Out-of-scope question — tests abstention (answer not in corpus)",
+    "source": "curated"
   },
   {
     "id": "qa_011",
     "question": "Which poet is associated with the Aghtamar monastery?",
     "expected_article": "article_009",
-    "notes": "Tests place-person co-reference"
+    "notes": "Tests place-person co-reference",
+    "source": "curated"
   },
   {
     "id": "qa_012",
     "question": "What is discussed in the article on Grigoris Aghtamartsi?",
     "expected_article": "article_023",
-    "notes": "Direct person-article lookup"
+    "notes": "Direct person-article lookup",
+    "source": "curated"
   },
   {
     "id": "qa_013",
     "question": "Which articles discuss the Sasanian dynasty in Armenia?",
     "expected_article": "article_016",
-    "notes": "Tests dynasty/period retrieval"
+    "notes": "Tests dynasty/period retrieval",
+    "source": "curated"
   },
   {
     "id": "qa_014",
     "question": "What manuscript sources are cited for the hymnal?",
     "expected_article": "article_054",
-    "notes": "Tests manuscript ref in article_054 (Bodleian)"
+    "notes": "Tests manuscript ref in article_054 (Bodleian)",
+    "source": "curated"
   },
   {
     "id": "qa_015",
     "question": "What is the role of Sirarpi Ter-Nersessian in Armenian art history?",
     "expected_article": "article_055",
-    "notes": "Tests modern scholar retrieval"
+    "notes": "Tests modern scholar retrieval",
+    "source": "curated"
+  },
+  {
+    "id": "qa_gen_person_001",
+    "question": "Which article in the corpus discusses Բաբկէն Չուգասզեանի?",
+    "expected_article": "article_001",
+    "expected_contains": "Բաբկէն Չուգասզեանի",
+    "notes": "Auto-generated from article_001 standOff person_1",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_ms_001",
+    "question": "Which article references the manuscript at Bodleian Library?",
+    "expected_article": "article_008",
+    "expected_contains": "Bodleian Library",
+    "notes": "Auto-generated from article_008 msDesc",
+    "source": "programmatic-ms"
+  },
+  {
+    "id": "qa_gen_title_001",
+    "question": "What does the article \"ԵՐԱԽՏԱԳԻՏՈՒԹԵԱՆ ԽՕՍՔ\" cover?",
+    "expected_article": "article_001",
+    "notes": "Auto-generated from titleStmt",
+    "source": "programmatic-title"
+  },
+  {
+    "id": "qa_gen_abstain_001",
+    "question": "Who won the FIFA World Cup in 2022?",
+    "expected_article": null,
+    "notes": "Out-of-scope; tests abstention",
+    "source": "programmatic-abstention"
+  },
+  {
+    "id": "qa_gen_person_002",
+    "question": "Which article in the corpus discusses Գուրգէն Մէլիքեա?",
+    "expected_article": "article_001",
+    "expected_contains": "Գուրգէն Մէլիքեա",
+    "notes": "Auto-generated from article_001 standOff person_2",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_ms_002",
+    "question": "Which article references the manuscript at Bodleian Library?",
+    "expected_article": "article_054",
+    "expected_contains": "Bodleian Library",
+    "notes": "Auto-generated from article_054 msDesc",
+    "source": "programmatic-ms"
+  },
+  {
+    "id": "qa_gen_title_002",
+    "question": "What does the article \"ԲԱԲԿԷՆ ՉՈՒԳԱՍԶԵԱՆԻ ԿԵՆՍԱԳՐՈՒԹԻՒՆԸ\" cover?",
+    "expected_article": "article_002",
+    "notes": "Auto-generated from titleStmt",
+    "source": "programmatic-title"
+  },
+  {
+    "id": "qa_gen_abstain_002",
+    "question": "What is the boiling point of mercury in Fahrenheit?",
+    "expected_article": null,
+    "notes": "Out-of-scope; tests abstention",
+    "source": "programmatic-abstention"
+  },
+  {
+    "id": "qa_gen_person_003",
+    "question": "Which article in the corpus discusses Աննա Չուլեանին?",
+    "expected_article": "article_001",
+    "expected_contains": "Աննա Չուլեանին",
+    "notes": "Auto-generated from article_001 standOff person_3",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_title_003",
+    "question": "What does the article \"ԼԵԶՎԱԲԱՆՈՒԹՅՈՒՆ\" cover?",
+    "expected_article": "article_003",
+    "notes": "Auto-generated from titleStmt",
+    "source": "programmatic-title"
+  },
+  {
+    "id": "qa_gen_abstain_003",
+    "question": "Describe the plot of the film Inception.",
+    "expected_article": null,
+    "notes": "Out-of-scope; tests abstention",
+    "source": "programmatic-abstention"
+  },
+  {
+    "id": "qa_gen_person_004",
+    "question": "Which article in the corpus discusses Հայկանուշ Ղազարեանին?",
+    "expected_article": "article_001",
+    "expected_contains": "Հայկանուշ Ղազարեանին",
+    "notes": "Auto-generated from article_001 standOff person_4",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_title_004",
+    "question": "What does the article \"ԲԱՌԱՔՆՆԱԿԱՆ ԴԻՏՈՂՈՒԹՅՈՒՆՆԵՐ Պառակ, փառակ, պառական, փառական, փառայ\" cover?",
+    "expected_article": "article_004",
+    "notes": "Auto-generated from titleStmt",
+    "source": "programmatic-title"
+  },
+  {
+    "id": "qa_gen_abstain_004",
+    "question": "What are the main tenets of Zoroastrianism?",
+    "expected_article": null,
+    "notes": "Out-of-scope; tests abstention",
+    "source": "programmatic-abstention"
+  },
+  {
+    "id": "qa_gen_person_005",
+    "question": "Which article in the corpus discusses Ռուզան Թումասեանի?",
+    "expected_article": "article_001",
+    "expected_contains": "Ռուզան Թումասեանի",
+    "notes": "Auto-generated from article_001 standOff person_5",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_title_005",
+    "question": "What does the article \"ԵՌԱԼԵԶՎՅԱՆ ՄԻՋՆԱԴԱՐՅԱՆ ՄԻ ՆՈՐ ԲԱՌԱՐԱՆ\" cover?",
+    "expected_article": "article_005",
+    "notes": "Auto-generated from titleStmt",
+    "source": "programmatic-title"
+  },
+  {
+    "id": "qa_gen_abstain_005",
+    "question": "Who composed the opera La Bohème?",
+    "expected_article": null,
+    "notes": "Out-of-scope; tests abstention",
+    "source": "programmatic-abstention"
+  },
+  {
+    "id": "qa_gen_person_006",
+    "question": "Which article in the corpus discusses Գէորգ Տէր-Վարդանեանին?",
+    "expected_article": "article_001",
+    "expected_contains": "Գէորգ Տէր-Վարդանեանին",
+    "notes": "Auto-generated from article_001 standOff person_6",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_title_006",
+    "question": "What does the article \"ԲԱՌԱՐԱՆ («Մկրտիչ Նաղաշ»)\" cover?",
+    "expected_article": "article_006",
+    "notes": "Auto-generated from titleStmt",
+    "source": "programmatic-title"
+  },
+  {
+    "id": "qa_gen_abstain_006",
+    "question": "What is the population of Tokyo?",
+    "expected_article": null,
+    "notes": "Out-of-scope; tests abstention",
+    "source": "programmatic-abstention"
+  },
+  {
+    "id": "qa_gen_person_007",
+    "question": "Which article in the corpus discusses Ռիթա Թոքաթները Բրայան?",
+    "expected_article": "article_001",
+    "expected_contains": "Ռիթա Թոքաթները Բրայան",
+    "notes": "Auto-generated from article_001 standOff person_7",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_title_007",
+    "question": "What does the article \"ԳՐԻԳՈՐԻՍ ԱՂԹԱՄԱՐՑՈՒ ՏԱՂԵՐԻ ՕՏԱՐ ԲԱՌԵՐԻ ԲԱՌԱՐԱՆ\" cover?",
+    "expected_article": "article_007",
+    "notes": "Auto-generated from titleStmt",
+    "source": "programmatic-title"
+  },
+  {
+    "id": "qa_gen_abstain_007",
+    "question": "Explain the theory of relativity.",
+    "expected_article": null,
+    "notes": "Out-of-scope; tests abstention",
+    "source": "programmatic-abstention"
+  },
+  {
+    "id": "qa_gen_person_008",
+    "question": "Which article in the corpus discusses Մելինէ Մարաշլեան Մելքոնեանը?",
+    "expected_article": "article_001",
+    "expected_contains": "Մելինէ Մարաշլեան Մելքոնեանը",
+    "notes": "Auto-generated from article_001 standOff person_8",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_title_008",
+    "question": "What does the article \"ՊԱՐՍԿԵՐԵՆ-ՀԱՅԵՐԵՆ ԱՌԱՋԻՆ ՏՊԱԳԻՐ ԲԱՌԱՐԱՆԸ (Գեորգ Դպիր Պալատացու ծննդյան 225-ամյակ\" cover?",
+    "expected_article": "article_008",
+    "notes": "Auto-generated from titleStmt",
+    "source": "programmatic-title"
+  },
+  {
+    "id": "qa_gen_abstain_008",
+    "question": "Which cryptocurrency had the highest market cap in 2024?",
+    "expected_article": null,
+    "notes": "Out-of-scope; tests abstention",
+    "source": "programmatic-abstention"
+  },
+  {
+    "id": "qa_gen_person_009",
+    "question": "Which article in the corpus discusses Օսկար Թաթոսեան?",
+    "expected_article": "article_001",
+    "expected_contains": "Օսկար Թաթոսեան",
+    "notes": "Auto-generated from article_001 standOff person_9",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_title_009",
+    "question": "What does the article \"ՊԱՐՍԿԵՐԵՆՈՒՄ ԱՐԱԲԵՐԵՆԻՑ ՓՈԽԱՌՅԱԼ ԲԱՌԵՐԻ ՀԱՅԱՏԱՌ ՄԻՋՆԱԴԱՐՅԱՆ ՄԻ ԲԱՌԱՐԱՆ\" cover?",
+    "expected_article": "article_009",
+    "notes": "Auto-generated from titleStmt",
+    "source": "programmatic-title"
+  },
+  {
+    "id": "qa_gen_abstain_009",
+    "question": "What is the currency of Iceland?",
+    "expected_article": null,
+    "notes": "Out-of-scope; tests abstention",
+    "source": "programmatic-abstention"
+  },
+  {
+    "id": "qa_gen_person_010",
+    "question": "Which article in the corpus discusses Բաբկէն Լեւոնի Չուգասզեանը?",
+    "expected_article": "article_002",
+    "expected_contains": "Բաբկէն Լեւոնի Չուգասզեանը",
+    "notes": "Auto-generated from article_002 standOff person_1",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_title_010",
+    "question": "What does the article \"[ԱՐԱԲԵՐԵՆ-ՊԱՐՍԿԵՐԵՆ-ՀԱՅԵՐԵՆ ԲԱՌԱՐԱՆ]\" cover?",
+    "expected_article": "article_010",
+    "notes": "Auto-generated from titleStmt",
+    "source": "programmatic-title"
+  },
+  {
+    "id": "qa_gen_abstain_010",
+    "question": "Who wrote the novel Ulysses?",
+    "expected_article": null,
+    "notes": "Out-of-scope; tests abstention",
+    "source": "programmatic-abstention"
+  },
+  {
+    "id": "qa_gen_person_011",
+    "question": "Which article in the corpus discusses Իբն Սինա?",
+    "expected_article": "article_002",
+    "expected_contains": "Իբն Սինա",
+    "notes": "Auto-generated from article_002 standOff person_2",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_title_011",
+    "question": "What does the article \"ԱՐԵՎԵԼԱԳԻՏՈՒԹՅՈՒՆ\" cover?",
+    "expected_article": "article_011",
+    "notes": "Auto-generated from titleStmt",
+    "source": "programmatic-title"
+  },
+  {
+    "id": "qa_gen_person_012",
+    "question": "Which article in the corpus discusses Վեներա Մանուկեանի?",
+    "expected_article": "article_002",
+    "expected_contains": "Վեներա Մանուկեանի",
+    "notes": "Auto-generated from article_002 standOff person_3",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_title_012",
+    "question": "What does the article \"ՀԱՅ-ԻՐԱՆԱԿԱՆ ԳՐԱԿԱՆ ԱՌՆՉՈՒԹՅՈՒՆՆԵՐ\" cover?",
+    "expected_article": "article_012",
+    "notes": "Auto-generated from titleStmt",
+    "source": "programmatic-title"
+  },
+  {
+    "id": "qa_gen_person_013",
+    "question": "Which article in the corpus discusses Գէորգ Դպիր Պալատեցու?",
+    "expected_article": "article_002",
+    "expected_contains": "Գէորգ Դպիր Պալատեցու",
+    "notes": "Auto-generated from article_002 standOff person_4",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_title_013",
+    "question": "What does the article \"ՀԱՅԱԳԻՏԱԿԱՆ ՊԱՐՍԿԵՐԵՆ ՆՈՐ ՀԱՆԴԵՍ\" cover?",
+    "expected_article": "article_013",
+    "notes": "Auto-generated from titleStmt",
+    "source": "programmatic-title"
+  },
+  {
+    "id": "qa_gen_person_014",
+    "question": "Which article in the corpus discusses Յովաննես Սեբաստացի?",
+    "expected_article": "article_002",
+    "expected_contains": "Յովաննես Սեբաստացի",
+    "notes": "Auto-generated from article_002 standOff person_5",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_title_014",
+    "question": "What does the article \"ԲՅՈՒՐԱՍՊԻ ԱԺԴԱՀԱԿԻ ԱՌԱՍՊԵԼԸ ԸՍՏ ՄՈՎՍԵՍ ԽՈՐԵՆԱՑՈՒ\" cover?",
+    "expected_article": "article_014",
+    "notes": "Auto-generated from titleStmt",
+    "source": "programmatic-title"
+  },
+  {
+    "id": "qa_gen_person_015",
+    "question": "Which article in the corpus discusses Եղիա Մուշեղեան Կարնեցի?",
+    "expected_article": "article_002",
+    "expected_contains": "Եղիա Մուշեղեան Կարնեցի",
+    "notes": "Auto-generated from article_002 standOff person_6",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_title_015",
+    "question": "What does the article \"ԻՐԱՆԱԿԱՆ ՎԻՊԱԿԱՆ ԶՐՈՅՑՆԵՐԻ ԱՐՁԱԳԱՆՔՆԵՐԸ ՄՈՎՍէՍ ԽՈՐԵՆԱՑՈՒ «ՀԱՅՈՑ ՊԱՏՄՈՒԹԵԱՆ» ՄԷՋ\" cover?",
+    "expected_article": "article_015",
+    "notes": "Auto-generated from titleStmt",
+    "source": "programmatic-title"
+  },
+  {
+    "id": "qa_gen_person_016",
+    "question": "Which article in the corpus discusses Փավստոս Բուզանդ?",
+    "expected_article": "article_004",
+    "expected_contains": "Փավստոս Բուզանդ",
+    "notes": "Auto-generated from article_004 standOff person_1",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_title_016",
+    "question": "What does the article \"ԻՐԱՆԱԿԱՆ ՎԻՊԱԿԱՆ ՀԵՐՈՍ ԶԱԼԻ ԱՌԱՍՊԵԼԻ ԱՐՁԱԳԱՆՔԸ ՄՈՎՍԷՍ ԽՈՐԵՆԱՑՈՒ «ՀԱՅՈՑ ՊԱՏՄՈՒԹԵԱ\" cover?",
+    "expected_article": "article_016",
+    "notes": "Auto-generated from titleStmt",
+    "source": "programmatic-title"
+  },
+  {
+    "id": "qa_gen_person_017",
+    "question": "Which article in the corpus discusses Մովսէս Խորենացի?",
+    "expected_article": "article_004",
+    "expected_contains": "Մովսէս Խորենացի",
+    "notes": "Auto-generated from article_004 standOff person_2",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_title_017",
+    "question": "What does the article \"ԻՐԱՆԱԿԱՆ ՎԻՊԱԿԱՆ ԶՐՈՒՅՑՆԵՐԻ ԱՐՁԱԳԱՆՔՆԵՐԸ ԳՐԻԳՈՐ ՄԱԳԻՍՏՐՈՍԻ «ԹՂԹԵՐՈՒՄ»\" cover?",
+    "expected_article": "article_017",
+    "notes": "Auto-generated from titleStmt",
+    "source": "programmatic-title"
+  },
+  {
+    "id": "qa_gen_person_018",
+    "question": "Which article in the corpus discusses Թովմա Արծրունի?",
+    "expected_article": "article_004",
+    "expected_contains": "Թովմա Արծրունի",
+    "notes": "Auto-generated from article_004 standOff person_3",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_title_018",
+    "question": "What does the article \"ОТЗВУКИ ИРАНСКИХ ЭПИЧЕСКИХ СКАЗАНИЙ В «ПИСЬМАХ» ГРИГОРА МАГИСТРОСА\" cover?",
+    "expected_article": "article_018",
+    "notes": "Auto-generated from titleStmt",
+    "source": "programmatic-title"
+  },
+  {
+    "id": "qa_gen_person_019",
+    "question": "Which article in the corpus discusses Մկրտիչ Նաղաշ?",
+    "expected_article": "article_006",
+    "expected_contains": "Մկրտիչ Նաղաշ",
+    "notes": "Auto-generated from article_006 standOff person_1",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_title_019",
+    "question": "What does the article \"ÉCHOS DE LÉGENDES ÉPIQUES IRANIENNES DANS LES «LETTRES» DE GRIGOR MAGISTROS\" cover?",
+    "expected_article": "article_019",
+    "notes": "Auto-generated from titleStmt",
+    "source": "programmatic-title"
+  },
+  {
+    "id": "qa_gen_person_020",
+    "question": "Which article in the corpus discusses Գէորգ Դպիր?",
+    "expected_article": "article_006",
+    "expected_contains": "Գէորգ Դպիր",
+    "notes": "Auto-generated from article_006 standOff person_2",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_title_020",
+    "question": "What does the article \"ՆՈՐՈՒՅԹՆԵՐ ԳՐԻԳՈՐ ՄԱԳԻՍՏՐՈՍԻ «ԹՂԹԵՐՈՒՄ»\" cover?",
+    "expected_article": "article_020",
+    "notes": "Auto-generated from titleStmt",
+    "source": "programmatic-title"
+  },
+  {
+    "id": "qa_gen_person_021",
+    "question": "Which article in the corpus discusses Գրիգորիս Աղթամարցու?",
+    "expected_article": "article_006",
+    "expected_contains": "Գրիգորիս Աղթամարցու",
+    "notes": "Auto-generated from article_006 standOff person_3",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_022",
+    "question": "Which article in the corpus discusses Կոստանդին Երզնկացին?",
+    "expected_article": "article_006",
+    "expected_contains": "Կոստանդին Երզնկացին",
+    "notes": "Auto-generated from article_006 standOff person_4",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_023",
+    "question": "Which article in the corpus discusses Ղազար Փարպեցու?",
+    "expected_article": "article_007",
+    "expected_contains": "Ղազար Փարպեցու",
+    "notes": "Auto-generated from article_007 standOff person_2",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_024",
+    "question": "Which article in the corpus discusses Կոստանդին Երզն?",
+    "expected_article": "article_007",
+    "expected_contains": "Կոստանդին Երզն",
+    "notes": "Auto-generated from article_007 standOff person_3",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_025",
+    "question": "Which article in the corpus discusses Գևորգ Դպիր Տեր-Հովհաննեսյանը?",
+    "expected_article": "article_008",
+    "expected_contains": "Գևորգ Դպիր Տեր-Հովհաննեսյանը",
+    "notes": "Auto-generated from article_008 standOff person_1",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_026",
+    "question": "Which article in the corpus discusses Գէորգեայ Դպրէ Տէր-Յովհաննեսեան?",
+    "expected_article": "article_008",
+    "expected_contains": "Գէորգեայ Դպրէ Տէր-Յովհաննեսեան",
+    "notes": "Auto-generated from article_008 standOff person_2",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_027",
+    "question": "Which article in the corpus discusses Յակոբայ Տիւզեան?",
+    "expected_article": "article_008",
+    "expected_contains": "Յակոբայ Տիւզեան",
+    "notes": "Auto-generated from article_008 standOff person_3",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_028",
+    "question": "Which article in the corpus discusses Հակոբ Տյուզյան Գեորգ?",
+    "expected_article": "article_008",
+    "expected_contains": "Հակոբ Տյուզյան Գեորգ",
+    "notes": "Auto-generated from article_008 standOff person_4",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_029",
+    "question": "Which article in the corpus discusses Դպիր Կոստանդնուպօլսեցի?",
+    "expected_article": "article_008",
+    "expected_contains": "Դպիր Կոստանդնուպօլսեցի",
+    "notes": "Auto-generated from article_008 standOff person_5",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_030",
+    "question": "Which article in the corpus discusses Գրիգորիս Աղթամարցի?",
+    "expected_article": "article_009",
+    "expected_contains": "Գրիգորիս Աղթամարցի",
+    "notes": "Auto-generated from article_009 standOff person_1",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_031",
+    "question": "Which article in the corpus discusses Կոստանդին Երզնկացի?",
+    "expected_article": "article_009",
+    "expected_contains": "Կոստանդին Երզնկացի",
+    "notes": "Auto-generated from article_009 standOff person_2",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_032",
+    "question": "Which article in the corpus discusses Մկրտիչ Էմին?",
+    "expected_article": "article_014",
+    "expected_contains": "Մկրտիչ Էմին",
+    "notes": "Auto-generated from article_014 standOff person_1",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_033",
+    "question": "Which article in the corpus discusses Մովսես Խորենացի?",
+    "expected_article": "article_014",
+    "expected_contains": "Մովսես Խորենացի",
+    "notes": "Auto-generated from article_014 standOff person_2",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_034",
+    "question": "Which article in the corpus discusses Սիմոն Գրքաշարյան?",
+    "expected_article": "article_014",
+    "expected_contains": "Սիմոն Գրքաշարյան",
+    "notes": "Auto-generated from article_014 standOff person_3",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_035",
+    "question": "Which article in the corpus discusses Հայկյան Արամի?",
+    "expected_article": "article_014",
+    "expected_contains": "Հայկյան Արամի",
+    "notes": "Auto-generated from article_014 standOff person_4",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_036",
+    "question": "Which article in the corpus discusses Ահրիմանը Ֆերիդունի?",
+    "expected_article": "article_014",
+    "expected_contains": "Ահրիմանը Ֆերիդունի",
+    "notes": "Auto-generated from article_014 standOff person_5",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_037",
+    "question": "Which article in the corpus discusses Եզնիկ Կողբացի?",
+    "expected_article": "article_014",
+    "expected_contains": "Եզնիկ Կողբացի",
+    "notes": "Auto-generated from article_014 standOff person_6",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_038",
+    "question": "Which article in the corpus discusses Արշակունի Արտաւանին?",
+    "expected_article": "article_016",
+    "expected_contains": "Արշակունի Արտաւանին",
+    "notes": "Auto-generated from article_016 standOff person_3",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_039",
+    "question": "Which article in the corpus discusses Թոռնիկ Մամիկոնյան?",
+    "expected_article": "article_017",
+    "expected_contains": "Թոռնիկ Մամիկոնյան",
+    "notes": "Auto-generated from article_017 standOff person_3",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_040",
+    "question": "Which article in the corpus discusses Սասանյան Խոսրով?",
+    "expected_article": "article_017",
+    "expected_contains": "Սասանյան Խոսրով",
+    "notes": "Auto-generated from article_017 standOff person_5",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_041",
+    "question": "Which article in the corpus discusses Ստեփանոս Տարոնացի?",
+    "expected_article": "article_020",
+    "expected_contains": "Ստեփանոս Տարոնացի",
+    "notes": "Auto-generated from article_020 standOff person_1",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_042",
+    "question": "Which article in the corpus discusses Մատթեոս Ուռհայեցի?",
+    "expected_article": "article_020",
+    "expected_contains": "Մատթեոս Ուռհայեցի",
+    "notes": "Auto-generated from article_020 standOff person_2",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_043",
+    "question": "Which article in the corpus discusses Վահրամ Պահլավունի?",
+    "expected_article": "article_020",
+    "expected_contains": "Վահրամ Պահլավունի",
+    "notes": "Auto-generated from article_020 standOff person_3",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_044",
+    "question": "Which article in the corpus discusses Գևորգ Բամպուքճյանի?",
+    "expected_article": "article_020",
+    "expected_contains": "Գևորգ Բամպուքճյանի",
+    "notes": "Auto-generated from article_020 standOff person_4",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_045",
+    "question": "Which article in the corpus discusses Մխիթար Հերացի?",
+    "expected_article": "article_022",
+    "expected_contains": "Մխիթար Հերացի",
+    "notes": "Auto-generated from article_022 standOff person_1",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_046",
+    "question": "Which article in the corpus discusses Առաքել Բաղիշեցի?",
+    "expected_article": "article_022",
+    "expected_contains": "Առաքել Բաղիշեցի",
+    "notes": "Auto-generated from article_022 standOff person_4",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_047",
+    "question": "Which article in the corpus discusses Թավրիզի Արամյան?",
+    "expected_article": "article_025",
+    "expected_contains": "Թավրիզի Արամյան",
+    "notes": "Auto-generated from article_025 standOff person_1",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_048",
+    "question": "Which article in the corpus discusses Ավագ Ավթանդիլյան?",
+    "expected_article": "article_025",
+    "expected_contains": "Ավագ Ավթանդիլյան",
+    "notes": "Auto-generated from article_025 standOff person_2",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_049",
+    "question": "Which article in the corpus discusses Հովսեփ Մելքումյան?",
+    "expected_article": "article_025",
+    "expected_contains": "Հովսեփ Մելքումյան",
+    "notes": "Auto-generated from article_025 standOff person_3",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_050",
+    "question": "Which article in the corpus discusses Գրիգոր Նարեկացի?",
+    "expected_article": "article_037",
+    "expected_contains": "Գրիգոր Նարեկացի",
+    "notes": "Auto-generated from article_037 standOff person_2",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_051",
+    "question": "Which article in the corpus discusses Տիւզեան Յակոբ Չէլէպիի?",
+    "expected_article": "article_037",
+    "expected_contains": "Տիւզեան Յակոբ Չէլէպիի",
+    "notes": "Auto-generated from article_037 standOff person_3",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_052",
+    "question": "Which article in the corpus discusses Պէզճեան Յարութիւն?",
+    "expected_article": "article_037",
+    "expected_contains": "Պէզճեան Յարութիւն",
+    "notes": "Auto-generated from article_037 standOff person_4",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_053",
+    "question": "Which article in the corpus discusses Էդուարդ Բրաունի?",
+    "expected_article": "article_038",
+    "expected_contains": "Էդուարդ Բրաունի",
+    "notes": "Auto-generated from article_038 standOff person_1",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_054",
+    "question": "Which article in the corpus discusses Սողոմոն Մելիք-Աբրահամյան?",
+    "expected_article": "article_043",
+    "expected_contains": "Սողոմոն Մելիք-Աբրահամյան",
+    "notes": "Auto-generated from article_043 standOff person_1",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_055",
+    "question": "Which article in the corpus discusses Յարութիւն Տէր-Յովհանեանց?",
+    "expected_article": "article_043",
+    "expected_contains": "Յարութիւն Տէր-Յովհանեանց",
+    "notes": "Auto-generated from article_043 standOff person_2",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_056",
+    "question": "Which article in the corpus discusses Փարակեցի Հովհաննես Ավետիսյան?",
+    "expected_article": "article_043",
+    "expected_contains": "Փարակեցի Հովհաննես Ավետիսյան",
+    "notes": "Auto-generated from article_043 standOff person_3",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_057",
+    "question": "Which article in the corpus discusses Ղազար Մարգարյանը?",
+    "expected_article": "article_046",
+    "expected_contains": "Ղազար Մարգարյանը",
+    "notes": "Auto-generated from article_046 standOff person_1",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_058",
+    "question": "Which article in the corpus discusses Եղիայիս Աստուածատուրեան?",
+    "expected_article": "article_046",
+    "expected_contains": "Եղիայիս Աստուածատուրեան",
+    "notes": "Auto-generated from article_046 standOff person_2",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_059",
+    "question": "Which article in the corpus discusses Գանճայեցի Ուսէփն?",
+    "expected_article": "article_047",
+    "expected_contains": "Գանճայեցի Ուսէփն",
+    "notes": "Auto-generated from article_047 standOff person_2",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_060",
+    "question": "Which article in the corpus discusses Գանճա Գանճայեցի Ատիբեկին?",
+    "expected_article": "article_047",
+    "expected_contains": "Գանճա Գանճայեցի Ատիբեկին",
+    "notes": "Auto-generated from article_047 standOff person_3",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_061",
+    "question": "Which article in the corpus discusses Նահապետ Ագուլեցի?",
+    "expected_article": "article_047",
+    "expected_contains": "Նահապետ Ագուլեցի",
+    "notes": "Auto-generated from article_047 standOff person_4",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_062",
+    "question": "Which article in the corpus discusses Պետրոս Թիֆլիսեցի?",
+    "expected_article": "article_047",
+    "expected_contains": "Պետրոս Թիֆլիսեցի",
+    "notes": "Auto-generated from article_047 standOff person_5",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_063",
+    "question": "Which article in the corpus discusses Մխիթար Սեբաստացի?",
+    "expected_article": "article_047",
+    "expected_contains": "Մխիթար Սեբաստացի",
+    "notes": "Auto-generated from article_047 standOff person_6",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_064",
+    "question": "Which article in the corpus discusses Հովհաննես Կոստանդնուպոլսեցի?",
+    "expected_article": "article_047",
+    "expected_contains": "Հովհաննես Կոստանդնուպոլսեցի",
+    "notes": "Auto-generated from article_047 standOff person_7",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_065",
+    "question": "Which article in the corpus discusses Ղուկաս Վանանդեցի?",
+    "expected_article": "article_047",
+    "expected_contains": "Ղուկաս Վանանդեցի",
+    "notes": "Auto-generated from article_047 standOff person_8",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_066",
+    "question": "Which article in the corpus discusses Թովմաս Վանանդեցի?",
+    "expected_article": "article_047",
+    "expected_contains": "Թովմաս Վանանդեցի",
+    "notes": "Auto-generated from article_047 standOff person_9",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_067",
+    "question": "Which article in the corpus discusses Եղիայիս Աստուածատուրեան Մուշեղեանց?",
+    "expected_article": "article_048",
+    "expected_contains": "Եղիայիս Աստուածատուրեան Մուշեղեանց",
+    "notes": "Auto-generated from article_048 standOff person_1",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_068",
+    "question": "Which article in the corpus discusses Եղիա Մուշեղյան?",
+    "expected_article": "article_048",
+    "expected_contains": "Եղիա Մուշեղյան",
+    "notes": "Auto-generated from article_048 standOff person_2",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_069",
+    "question": "Which article in the corpus discusses Վարդգես Բաբայան?",
+    "expected_article": "article_048",
+    "expected_contains": "Վարդգես Բաբայան",
+    "notes": "Auto-generated from article_048 standOff person_3",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_070",
+    "question": "Which article in the corpus discusses Մուրատ Ռաֆայելյան?",
+    "expected_article": "article_052",
+    "expected_contains": "Մուրատ Ռաֆայելյան",
+    "notes": "Auto-generated from article_052 standOff person_1",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_071",
+    "question": "Which article in the corpus discusses Մկրտիչ Ավգերյանը?",
+    "expected_article": "article_052",
+    "expected_contains": "Մկրտիչ Ավգերյանը",
+    "notes": "Auto-generated from article_052 standOff person_2",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_072",
+    "question": "Which article in the corpus discusses Արշակ Տիգրանյան?",
+    "expected_article": "article_053",
+    "expected_contains": "Արշակ Տիգրանյան",
+    "notes": "Auto-generated from article_053 standOff person_1",
+    "source": "programmatic-person"
+  },
+  {
+    "id": "qa_gen_person_073",
+    "question": "Which article in the corpus discusses Դաւթեան Սիմէօն?",
+    "expected_article": "article_053",
+    "expected_contains": "Դաւթեան Սիմէօն",
+    "notes": "Auto-generated from article_053 standOff person_2",
+    "source": "programmatic-person"
   }
 ]

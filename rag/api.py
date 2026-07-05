@@ -126,25 +126,51 @@ def ask():
         ],
     )
 
-    # Extract text and citations from response
-    answer_parts = []
-    citations = []
+    # Extract text and citations. In the Anthropic Citations API each text
+    # block carries its own citations list; a text block with no citations is
+    # an uncited claim (LettuceDetect-style verification gate).
+    answer_parts: list[str] = []
+    citations: list[dict] = []
+    uncited_spans: list[str] = []
     for block in response.content:
-        if block.type == 'text':
-            answer_parts.append(block.text)
-        elif block.type == 'citations':
-            for citation in (block.citations or []):
-                citations.append({
-                    'document_id': getattr(citation, 'document_id', None),
-                    'title': getattr(citation, 'document_title', None),
-                    'quote': getattr(citation, 'cited_text', None),
-                })
+        if getattr(block, 'type', None) != 'text':
+            continue
+        text = getattr(block, 'text', '') or ''
+        answer_parts.append(text)
+        block_citations = getattr(block, 'citations', None) or []
+        if text.strip() and not block_citations:
+            # Non-empty text with no supporting citation.
+            uncited_spans.append(text.strip())
+        for citation in block_citations:
+            citations.append({
+                'document_id': getattr(citation, 'document_id', None),
+                'title': getattr(citation, 'document_title', None),
+                'quote': getattr(citation, 'cited_text', None),
+            })
+
+    verified = len(uncited_spans) == 0
+    strict = (data.get('strict') or '').lower() == 'true' or data.get('strict') is True
+    if not verified and strict:
+        return jsonify({
+            'query': query,
+            'answer': (
+                'The corpus cannot support a fully-cited answer to this question. '
+                'Verification gate rejected the response.'
+            ),
+            'citations': [],
+            'abstained': True,
+            'reason': 'uncited_claims',
+            'uncited_spans': uncited_spans,
+        })
 
     return jsonify({
         'query': query,
         'answer': ' '.join(answer_parts),
         'citations': citations,
         'abstained': False,
+        'verified': verified,
+        'uncited_span_count': len(uncited_spans),
+        'uncited_spans': uncited_spans if not verified else [],
         'chunks_used': len(results),
     })
 

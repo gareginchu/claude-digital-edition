@@ -1,0 +1,14 @@
+"""Update requirements.txt with RAG dependencies."""
+# Keep existing
+lxml>=6.0.2
+requests>=2.31.0
+pytest>=7.0
+python-dotenv>=1.0
+pdfminer.six>=20221105
+
+# Add RAG + embedding + API
+sentence-transformers>=3.0
+psycopg[binary]>=3.1
+flask>=3.0
+anthropic>=0.25
+numpy>=1.24

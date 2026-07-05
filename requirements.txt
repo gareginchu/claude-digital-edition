@@ -3,3 +3,8 @@ requests
 pytest
 python-dotenv
 pdfminer.six
+sentence-transformers>=3.0
+psycopg[binary]>=3.1
+flask>=3.0
+anthropic>=0.25
+numpy>=1.24

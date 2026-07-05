@@ -1,0 +1,68 @@
+---
+import fs from 'node:fs';
+
+const backmatterDir = new URL('../../../pipeline/backmatter', import.meta.url);
+
+function parseBackmatterFile(raw) {
+  const lines = raw.split(/\r?\n/);
+  let title = 'Back Matter';
+  let sourcePages = 'unknown';
+  let unit = 'unknown';
+  let i = 0;
+
+  while (i < lines.length && lines[i].startsWith('# ')) {
+    const header = lines[i].slice(2).trim();
+    if (!title || title === 'Back Matter') {
+      title = header;
+    } else if (header.toLowerCase().startsWith('source_pages:')) {
+      sourcePages = header.split(':', 2)[1]?.trim() || sourcePages;
+    } else if (header.toLowerCase().startsWith('source_unit:')) {
+      unit = header.split(':', 2)[1]?.trim() || unit;
+    }
+    i += 1;
+  }
+
+  const body = lines.slice(i).join('\n').trim();
+  return { title, sourcePages, unit, body };
+}
+
+let sections = [];
+try {
+  const files = fs.readdirSync(backmatterDir).filter((f) => f.endsWith('.txt')).sort();
+  sections = files.map((file) => {
+    const raw = fs.readFileSync(new URL(file, backmatterDir), 'utf-8');
+    return { file, ...parseBackmatterFile(raw) };
+  });
+} catch {
+  sections = [];
+}
+---
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Back Matter</title>
+    <style>
+      body { max-width: 980px; margin: 2rem auto; padding: 0 1rem; font-family: 'Noto Serif Armenian', serif; line-height: 1.6; }
+      h1 { margin-bottom: 0.5rem; }
+      .meta { color: #555; margin-top: 0; }
+      section { border-top: 1px solid #ddd; padding-top: 1rem; margin-top: 1rem; }
+      pre { white-space: pre-wrap; font-family: inherit; background: #fafafa; border: 1px solid #eee; padding: 1rem; }
+    </style>
+  </head>
+  <body>
+    <h1>Back Matter</h1>
+    <p class="meta">Structural units split from the original article_056 bundle.</p>
+
+    {sections.length === 0 ? (
+      <p>No back-matter files found in pipeline/backmatter.</p>
+    ) : (
+      sections.map((s) => (
+        <section id={s.unit}>
+          <h2>{s.title}</h2>
+          <p class="meta">Unit: {s.unit} | Source pages: {s.sourcePages} | File: {s.file}</p>
+          <pre>{s.body}</pre>
+        </section>
+      ))
+    )}
+  </body>
+</html>

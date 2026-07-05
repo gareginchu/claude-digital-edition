@@ -1,0 +1,46 @@
+{
+  "volume": "Babken Chookaszian Vol. I",
+  "generated_at": "2026-07-05",
+  "policy": {
+    "article_enrichment_range": "article_001..article_055",
+    "exclude_from_article_enrichment": [
+      "article_056",
+      "backmatter_index",
+      "backmatter_plates",
+      "backmatter_contents"
+    ]
+  },
+  "units": [
+    {
+      "id": "article_001..article_055",
+      "kind": "article",
+      "count": 55,
+      "enrichable": true,
+      "public_url_pattern": "/articles/article_NNN.html"
+    },
+    {
+      "id": "article_056",
+      "kind": "backmatter_bundle",
+      "enrichable": false,
+      "notes": "Legacy bundle retained for traceability; split into structural units below."
+    },
+    {
+      "id": "backmatter_index",
+      "kind": "index",
+      "source_file": "pipeline/backmatter/backmatter_index.txt",
+      "enrichable": false
+    },
+    {
+      "id": "backmatter_plates",
+      "kind": "plates",
+      "source_file": "pipeline/backmatter/backmatter_plates.txt",
+      "enrichable": false
+    },
+    {
+      "id": "backmatter_contents",
+      "kind": "contents",
+      "source_file": "pipeline/backmatter/backmatter_contents.txt",
+      "enrichable": false
+    }
+  ]
+}

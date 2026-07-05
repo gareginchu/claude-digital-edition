@@ -17,7 +17,7 @@ try {
     {files.length === 0 ? (
       <li>No pre-rendered HTML found in /site/html</li>
     ) : (
-      files.map(f => <li><a href={`/${f}`}>{f}</a></li>)
+      files.map(f => <li><a href={`./articles/${f}`}>{f}</a></li>)
     )}
   </ul>
 </div>

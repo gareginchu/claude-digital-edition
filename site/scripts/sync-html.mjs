@@ -1,0 +1,24 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const siteDir = path.resolve(__dirname, '..');
+const sourceDir = path.join(siteDir, 'html');
+const publicArticlesDir = path.join(siteDir, 'public', 'articles');
+
+fs.mkdirSync(publicArticlesDir, { recursive: true });
+
+if (!fs.existsSync(sourceDir)) {
+  console.log('No site/html directory found; skipping article sync.');
+  process.exit(0);
+}
+
+for (const entry of fs.readdirSync(sourceDir)) {
+  if (!entry.endsWith('.html')) continue;
+  fs.copyFileSync(path.join(sourceDir, entry), path.join(publicArticlesDir, entry));
+}
+
+console.log('Synced pre-rendered article HTML into site/public/articles');

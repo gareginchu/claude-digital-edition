@@ -36,7 +36,15 @@ jobs:
         python pipeline/enrich_tei.py tei tei_enriched --start-article 1 --end-article 55
         python site/batch_render_tei.py tei_enriched site/html site/tei_to_html.py
         python rag/create_rag_index.py tei rag/index.json
-        python iiif/create_manifest.py iiif/manifests
+        # IIIF manifest is regenerated only when local tile output exists;
+        # otherwise CI keeps the committed manifest.json (references
+        # placeholder https://REPLACE-ME.example.org/iiif/... URLs — rights
+        # guardrail: plate bytes never enter CI).
+        if [ -d iiif/tiles ] && [ -f iiif/pages/captions.json ]; then
+          python iiif/create_manifest.py --out iiif/manifests
+        else
+          echo "iiif/tiles or iiif/pages/captions.json absent; keeping committed manifest.json"
+        fi
     
     - name: Set up Node.js
       uses: actions/setup-node@v4

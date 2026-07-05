@@ -39,9 +39,13 @@ jobs:
     - name: Build RAG index
       run: |
         python rag/create_rag_index.py tei rag/index.json
-    - name: Generate IIIF manifest
+    - name: (Re)generate IIIF manifest if tiles present
       run: |
-        python iiif/create_manifest.py iiif/manifests
+        if [ -d iiif/tiles ] && [ -f iiif/pages/captions.json ]; then
+          python iiif/create_manifest.py --out iiif/manifests
+        else
+          echo "iiif/tiles or iiif/pages/captions.json absent; keeping committed manifest.json"
+        fi
     - name: Check outputs
       run: |
         test -d site/html || (echo 'HTML render failed' && exit 1)

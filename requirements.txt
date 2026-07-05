@@ -5,6 +5,10 @@ python-dotenv
 pdfminer.six
 sentence-transformers>=3.0
 psycopg[binary]>=3.1
+# ChromaDB is the chosen embedded vector store for the hybrid BM25 + dense
+# retrieval path (see rag/embed_dense.py, rag/hybrid_retrieve.py). File-based
+# persistent client under rag/chroma/; no server required.
+chromadb>=0.5
 flask>=3.0
 anthropic>=0.25
 numpy>=1.24

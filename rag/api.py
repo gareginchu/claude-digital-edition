@@ -41,6 +41,15 @@ TOP_K = 5
 ABSTENTION_THRESHOLD = 1.5   # BM25 score below which we abstain
 CLAUDE_MODEL = 'claude-3-5-sonnet-20241022'
 
+# Retrieval backends selectable at request time.
+#   'bm25'   - historical default; only backend that trips the abstention gate
+#   'dense'  - BGE-M3 similarity via ChromaDB
+#   'hybrid' - RRF fusion of bm25 + dense
+# Abstention thresholds are calibrated against BM25 scores; for non-BM25
+# modes we fall back to a conservative "abstain iff no results" policy.
+VALID_MODES = {'bm25', 'dense', 'hybrid'}
+DEFAULT_MODE = 'bm25'
+
 app = Flask(__name__)
 _index: CorpusIndex | None = None
 
@@ -56,6 +65,22 @@ def _get_index() -> CorpusIndex:
             )
         _index = CorpusIndex.load(str(INDEX_PATH))
     return _index
+
+
+def _resolve_mode(data: dict) -> str:
+    mode = (data.get('mode') or DEFAULT_MODE).lower().strip()
+    if mode not in VALID_MODES:
+        return DEFAULT_MODE
+    return mode
+
+
+def _retrieve(query: str, top_k: int, mode: str) -> list[dict]:
+    """Dispatch to BM25 (existing behaviour) or the hybrid module."""
+    if mode == 'bm25':
+        return _get_index().search(query, top_k=top_k)
+    # Lazy import so BM25-only deployments do not need chromadb / torch.
+    from rag.hybrid_retrieve import hybrid_search
+    return hybrid_search(query, top_k=top_k, mode=mode)
 
 
 @app.route('/health', methods=['GET'])
@@ -74,8 +99,17 @@ def search():
     if not query:
         return jsonify({'error': 'query required'}), 400
     top_k = int(data.get('top_k', TOP_K))
-    results = _get_index().search(query, top_k=top_k)
-    return jsonify({'query': query, 'results': results, 'count': len(results)})
+    mode = _resolve_mode(data)
+    try:
+        results = _retrieve(query, top_k=top_k, mode=mode)
+    except Exception as e:
+        return jsonify({'error': f'retrieval failed ({mode}): {e}'}), 500
+    return jsonify({
+        'query': query,
+        'mode': mode,
+        'results': results,
+        'count': len(results),
+    })
 
 
 @app.route('/ask', methods=['POST'])
@@ -86,12 +120,25 @@ def ask():
     if not query:
         return jsonify({'error': 'query required'}), 400
 
-    results = _get_index().search(query, top_k=TOP_K)
+    mode = _resolve_mode(data)
+    try:
+        results = _retrieve(query, top_k=TOP_K, mode=mode)
+    except Exception as e:
+        return jsonify({'error': f'retrieval failed ({mode}): {e}'}), 500
 
-    # Abstain if no result exceeds threshold
-    if not results or results[0].get('score', 0) < ABSTENTION_THRESHOLD:
+    # Abstention gate. BM25 uses a calibrated score threshold; hybrid/dense
+    # scores are not comparable, so we fall back to "abstain iff empty".
+    if mode == 'bm25':
+        low_confidence = (
+            not results or results[0].get('score', 0) < ABSTENTION_THRESHOLD
+        )
+    else:
+        low_confidence = not results
+
+    if low_confidence:
         return jsonify({
             'query': query,
+            'mode': mode,
             'answer': (
                 'The corpus does not contain sufficiently relevant information '
                 'to answer this question reliably.'
@@ -100,15 +147,21 @@ def ask():
             'abstained': True,
         })
 
-    # Build document list for Claude Citations
+    # Build document list for Claude Citations. Hybrid / dense hits do not
+    # carry the BM25 global chunk index; fall back to article_id + chunk_index.
+    def _doc_id(hit: dict, i: int) -> str:
+        if 'chunk_index_global' in hit:
+            return f'chunk_{hit["chunk_index_global"]}'
+        return f'chunk_{hit.get("article_id", "?")}_{hit.get("chunk_index", i)}'
+
     documents = [
         {
             'type': 'document',
-            'id': f'chunk_{r["chunk_index_global"]}',
+            'id': _doc_id(r, i),
             'title': f'{r.get("title", r.get("article_id", ""))} (p. {r.get("pages", "")})',
             'content': [{'type': 'text', 'text': r['text']}],
         }
-        for r in results
+        for i, r in enumerate(results)
     ]
 
     client = anthropic.Anthropic()
@@ -161,6 +214,7 @@ def ask():
     if not verified and strict:
         return jsonify({
             'query': query,
+            'mode': mode,
             'answer': (
                 'The corpus cannot support a fully-cited answer to this question. '
                 'Verification gate rejected the response.'
@@ -173,6 +227,7 @@ def ask():
 
     return jsonify({
         'query': query,
+        'mode': mode,
         'answer': ' '.join(answer_parts),
         'citations': citations,
         'abstained': False,

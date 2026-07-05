@@ -3,10 +3,7 @@
   <teiHeader>
     <fileDesc>
       <titleStmt>
-        <title># ԼԵԶՎԱԲԱՆՈՒԹՅՈՒՆ
-# source_pages: 13-13
-
-ԼԵԶՎԱԲԱՆՈՒԹՅՈՒՆ</title>
+        <title>ԼԵԶՎԱԲԱՆՈՒԹՅՈՒՆ</title>
       </titleStmt>
       <publicationStmt>
         <p>Unpublished draft from Babken Chookaszian volume I extraction</p>
@@ -19,12 +16,9 @@
   <text>
     <body>
       <div>
-        <head>Article 3</head>
-        <p># ԼԵԶՎԱԲԱՆՈՒԹՅՈՒՆ
-# source_pages: 13-13
-
-ԼԵԶՎԱԲԱՆՈՒԹՅՈՒՆ</p>
-        <note>Full text truncated for TEI draft. See article_003.txt for complete extraction.</note>
+        <head>ԼԵԶՎԱԲԱՆՈՒԹՅՈՒՆ</head>
+        <note type="source_pages">13-13</note>
+        <p>ԼԵԶՎԱԲԱՆՈՒԹՅՈՒՆ</p>
       </div>
     </body>
   </text>

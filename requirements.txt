@@ -8,3 +8,8 @@ psycopg[binary]>=3.1
 flask>=3.0
 anthropic>=0.25
 numpy>=1.24
+# IIIF plates pipeline (iiif/extract_plates.py, iiif/build_tiles.py).
+# PyMuPDF ships pre-built wheels for Windows -- no Poppler / MuPDF native
+# install needed. See iiif/README.md for Windows install steps.
+pymupdf>=1.24
+Pillow>=10.0

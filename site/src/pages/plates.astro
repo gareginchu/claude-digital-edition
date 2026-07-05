@@ -1,0 +1,192 @@
+---
+// Plates gallery page. Embeds the IIIF Presentation 3 manifest for the
+// 23-page plates insert (pp. 549-571) of Chookaszian Vol. I via the Clover
+// IIIF viewer. See iiif/README.md for pipeline and rights notes.
+//
+// Endings-Principles caveat: the viewer requires JS. This page therefore
+// prints a full, JS-free fallback list (labels + captions + static thumbnails
+// + a direct link to each plate JPEG) so the content is readable without a
+// running Clover instance. The viewer is progressive enhancement.
+
+import fs from 'node:fs';
+import path from 'node:path';
+
+const repoRoot = path.resolve(process.cwd(), '..');
+
+// Locate the manifest. Prefer a public/ copy if present (recommended for
+// deployment); otherwise fall back to reading iiif/manifests/manifest.json
+// directly from the worktree.
+const manifestCandidates = [
+  path.join(process.cwd(), 'public', 'iiif', 'manifest.json'),
+  path.join(repoRoot, 'iiif', 'manifests', 'manifest.json'),
+];
+const manifestPath = manifestCandidates.find((p) => fs.existsSync(p));
+
+// The URL under which the manifest is served at runtime. Astro serves the
+// `public/` tree at the site root, so if we copy the manifest into
+// `site/public/iiif/manifest.json` it will be reachable at `/iiif/manifest.json`.
+// The `manifestUrl` value below is what Clover fetches; edit for deployment.
+const manifestUrl = '/iiif/manifest.json';
+
+let manifest: any = null;
+let canvases: any[] = [];
+let manifestError: string | null = null;
+if (manifestPath) {
+  try {
+    manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
+    canvases = Array.isArray(manifest?.items) ? manifest.items : [];
+  } catch (err: any) {
+    manifestError = `Failed to parse ${manifestPath}: ${err.message}`;
+  }
+} else {
+  manifestError = 'IIIF manifest not found. Run `python iiif/create_manifest.py` and copy iiif/manifests/manifest.json to site/public/iiif/manifest.json.';
+}
+
+const pick = (labelObj: any, lang: string = 'en'): string => {
+  if (!labelObj) return '';
+  const values = labelObj[lang] || labelObj.hy || labelObj.none || Object.values(labelObj)[0];
+  return Array.isArray(values) ? values.join(' ') : String(values || '');
+};
+
+const summary = pick(manifest?.summary);
+const title = pick(manifest?.label) || 'Plates insert';
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Plates | Chookaszian Collected Works Vol. I</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        max-width: 1100px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        font-family: 'Noto Serif Armenian', 'Noto Serif', Georgia, serif;
+        line-height: 1.55;
+        color: #222;
+      }
+      h1 { margin-bottom: 0.25rem; }
+      .lang-hy { font-family: 'Noto Serif Armenian', 'Noto Sans Armenian', serif; }
+      .rights-banner {
+        border: 1px solid #b58900;
+        background: #fdf6e3;
+        padding: 0.75rem 1rem;
+        margin: 1rem 0;
+        border-radius: 4px;
+      }
+      .rights-banner strong { color: #b58900; }
+      #clover-container {
+        min-height: 640px;
+        border: 1px solid #ddd;
+        margin-top: 1rem;
+      }
+      #clover-fallback ol { list-style: decimal inside; }
+      #clover-fallback li {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        border-top: 1px solid #eee;
+        padding: 0.75rem 0;
+      }
+      #clover-fallback img {
+        max-width: 128px;
+        height: auto;
+        border: 1px solid #ccc;
+      }
+      #clover-fallback .caption { flex: 1; }
+      .meta { color: #555; font-size: 0.9rem; }
+    </style>
+  </head>
+  <body>
+    <p><a href="/">&larr; Home</a></p>
+    <h1>{title}</h1>
+    {summary ? <p class="meta">{summary}</p> : null}
+
+    <aside class="rights-banner">
+      <p><strong>Rights notice.</strong> The plates on this page reproduce material
+      from the printed Yerevan 2022/2023 edition (© Levon and Garegin Chugaszyan).
+      Miniatures originate from Matenadaran manuscripts and require per-image
+      clearance. <em>Public visibility: pending rights clearance.</em>
+      Do not redistribute the tile assets or manifest URLs outside of internal
+      review contexts until the heirs' licence and Matenadaran clearances are
+      signed. See <code>rights/</code>.</p>
+    </aside>
+
+    {manifestError ? (
+      <p class="meta"><strong>Manifest unavailable.</strong> {manifestError}</p>
+    ) : (
+      <>
+        <p class="meta">Manifest URL passed to Clover: <code>{manifestUrl}</code>
+        &middot; canvases: {canvases.length}</p>
+
+        {/* Clover embed. The <clover-iiif> web-component is registered by the
+            ESM bundle we import below. */}
+        <div id="clover-container">
+          <clover-iiif iiifContent={manifestUrl} viewerConfig='{"informationPanel":{"open":true,"renderAbout":true}}'></clover-iiif>
+        </div>
+
+        <script type="module" is:inline>
+          // Clover IIIF ships as an ESM web component. We load from a CDN so
+          // no npm install is required for local review. Replace with a
+          // vendored copy or an npm-installed dependency before production.
+          // If the CDN is unreachable, the JS-free fallback below is shown.
+          const CLOVER_SRC = 'https://esm.sh/@samvera/clover-iiif@2.14.4?bundle';
+          import(CLOVER_SRC)
+            .then(() => {
+              const fb = document.getElementById('clover-fallback');
+              if (fb) fb.setAttribute('data-viewer-loaded', 'true');
+            })
+            .catch((err) => {
+              console.error('Clover failed to load; falling back:', err);
+              const el = document.getElementById('clover-container');
+              if (el) el.innerHTML = '<p class="meta">Viewer unavailable (Clover CDN not reachable). See list below.</p>';
+            });
+        </script>
+      </>
+    )}
+
+    <h2>Plate index (JavaScript-free)</h2>
+    <p class="meta">Static list mirroring the manifest. Each thumbnail is the
+    256px width variant; clicking a plate opens the full-resolution JPEG.
+    This section is always rendered so the page satisfies the project's
+    Endings-Principles / WCAG 2.2 AA requirement of full readability without JS.</p>
+
+    {canvases.length === 0 ? (
+      <p><em>No canvases found. Run the extraction and manifest scripts:</em></p>
+      <pre>python iiif/extract_plates.py &amp;&amp; python iiif/build_tiles.py &amp;&amp; python iiif/create_manifest.py</pre>
+    ) : (
+      <div id="clover-fallback">
+        <ol>
+          {canvases.map((c: any) => {
+            const label = pick(c.label);
+            const captionArm = pick(
+              c.metadata?.find((m: any) => pick(m.label)?.startsWith('Caption'))?.value,
+              'hy',
+            );
+            const pageMeta = pick(
+              c.metadata?.find((m: any) => pick(m.label)?.startsWith('Source page'))?.value,
+              'none',
+            );
+            // Use the canvas thumbnail as declared in the manifest.
+            const thumbId = c.thumbnail?.[0]?.id;
+            // Full-image URL points to the level-0 max variant.
+            const bodyId = c.items?.[0]?.items?.[0]?.body?.id;
+            return (
+              <li id={`plate-${c.id.split('/').pop()}`}>
+                {thumbId ? <a href={bodyId}><img src={thumbId} alt={label} loading="lazy" /></a> : null}
+                <div class="caption">
+                  <strong>{label}</strong>
+                  <div class="meta">{pageMeta}</div>
+                  <p class="lang-hy" lang="hy">{captionArm}</p>
+                  <p class="meta">
+                    <a href={bodyId}>Full-resolution JPEG</a>
+                  </p>
+                </div>
+              </li>
+            );
+          })}
+        </ol>
+      </div>
+    )}
+  </body>
+</html>

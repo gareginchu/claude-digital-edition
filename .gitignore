@@ -20,3 +20,8 @@ build/
 # data
 *.sqlite
 *.db
+
+# generated enrichment output folders
+tei_enriched/
+tei_enriched_*/
+

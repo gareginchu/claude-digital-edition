@@ -10,6 +10,16 @@
       "backmatter_contents"
     ]
   },
+  "enrichment_baseline": {
+    "completed_at": "2026-07-05",
+    "articles_processed": 55,
+    "articles_with_persons": 27,
+    "articles_zero_recall": 28,
+    "total_ms_refs": 2,
+    "extractor": "pipeline/enrich_tei.py",
+    "output_dir": "tei_enriched/",
+    "notes": "Rule-based heuristic extractor; QA validated across 6 batches (001-055). Zero-recall articles are typically lexicon-style, dictionary, or bibliography-heavy content requiring a separate extraction profile. Inflectional deduplication and mixed-script pipeline encoding fix (article_054) remain open tickets."
+  },
   "units": [
     {
       "id": "article_001..article_055",

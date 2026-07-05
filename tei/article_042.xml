@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="hy">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>ԳՐԻԳՈՐԻՍ ԱՂԹԱՄԱՐՑՈՒ ՏԱՂԵՐԻ ՕՏԱՐ ԲԱՌԵՐԻ ԲԱՌԱՐԱՆ! 
+
+Բառարանը կազմելու համար հիմնականում օգտագործվել են</title>
+      </titleStmt>
+      <publicationStmt>
+        <p>Unpublished draft from Babken Chookaszian volume I extraction</p>
+      </publicationStmt>
+      <sourceDesc>
+        <p>Extracted from Babken_Chookaszian_Vol_I (2).pdf</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <div>
+        <head>Article 42</head>
+        <p>ԳՐԻԳՈՐԻՍ ԱՂԹԱՄԱՐՑՈՒ ՏԱՂԵՐԻ ՕՏԱՐ ԲԱՌԵՐԻ ԲԱՌԱՐԱՆ! 
+
+Բառարանը կազմելու համար հիմնականում օգտագործվել են՝ 
+1. Նոր բառգիրք հայկազեան լեզուի, հ. Ա և Բ, Վենետիկ, 1836-1837: 
+2. Գէորգ Դպիր, Բառարան պարսկերէն ըստ կարգի հայկական այբուբենից…, Կոս-
+
+տանդնուպօլիս, 1826: 
+
+3. Ղ. Ալիշան, Հայբուսակ կամ հայկական բուսաբառություն, Վենետիկ, 1895: 
+4. Գ. Կիրակոսեան, Բառարան պարսկերէն-հայերէն, Թեհրան, 1933։ 
+5. Պ. Զ. Կարապետեան, Մեծ բառարան օսմաներէնէ հայերէն, Կ. Պոլիս, 1912։ 
+6. Հր. Աճառեան, Հայերէն արմատական բառարա</p>
+        <note>Full text truncated for TEI draft. See article_042.txt for complete extraction.</note>
+      </div>
+    </body>
+  </text>
+</TEI>

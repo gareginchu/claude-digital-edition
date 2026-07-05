@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="hy">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>ԱՐԵՎԵԼԱԳԻՏԻՏԱԿԱՆ ԱՅԼ ՀՈԴՎԱԾՆԵՐ 
+
+ՀԱՅ ԱՐԵՎԵԼԱԳԻՏՈՒԹՅԱՆ ՀԻՄՆԱԴԻՐԸ 
+(ԳԵՈՐԳ ԴՊԻՐ ՊԱԼԱՏՑՈՒ ՄԱՀՎԱՆ 150-ԱՄՅ</title>
+      </titleStmt>
+      <publicationStmt>
+        <p>Unpublished draft from Babken Chookaszian volume I extraction</p>
+      </publicationStmt>
+      <sourceDesc>
+        <p>Extracted from Babken_Chookaszian_Vol_I (2).pdf</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <div>
+        <head>Article 306</head>
+        <p>ԱՐԵՎԵԼԱԳԻՏԻՏԱԿԱՆ ԱՅԼ ՀՈԴՎԱԾՆԵՐ 
+
+ՀԱՅ ԱՐԵՎԵԼԱԳԻՏՈՒԹՅԱՆ ՀԻՄՆԱԴԻՐԸ 
+(ԳԵՈՐԳ ԴՊԻՐ ՊԱԼԱՏՑՈՒ ՄԱՀՎԱՆ 150-ԱՄՅԱԿԻ ԱՌԹԻՎ)! 
+
+Մինչև անցյալ դարի վերջերը հեռավոր Կոստանդնուպոլսի Էտիրնե-Գաբուի հայ-
+կական գերեզմանատանը եղել է մարմարակերտ մի շիրիմ-հուշարձան, որի վրա մեսրո-
+պատառ ձոն է քանդակված եղել անխոնջ մանկավարժ ու գիտնական Գեորգ Դպիր Պա-
+լատցու հիշատակին։ 
+
+Նրա գրական հարուստ ժառանգությունից հետմահու հրատարակվել է միայն մի 
+աշխատություն՝ պարսկերեն-հայերեն բառարանը, հայ բառարանագրության մեջ եզակի 
+տեղ ունեցո</p>
+        <note>Full text truncated for TEI draft. See article_306.txt for complete extraction.</note>
+      </div>
+    </body>
+  </text>
+</TEI>

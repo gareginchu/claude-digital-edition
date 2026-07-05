@@ -1,0 +1,785 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://example.org/manifests/chookaszian-plates",
+  "type": "Manifest",
+  "label": {
+    "en": [
+      "Babken Chookaszian Vol. I - Plates Insert (24 pp.)"
+    ]
+  },
+  "description": {
+    "en": [
+      "Plates and illustrations from the second edition, Yerevan 2023"
+    ]
+  },
+  "items": [
+    {
+      "id": "https://example.org/canvas/plate_01",
+      "type": "Canvas",
+      "label": {
+        "en": [
+          "Plate 1"
+        ]
+      },
+      "height": 2000,
+      "width": 1400,
+      "items": [
+        {
+          "id": "https://example.org/page/plate_01/1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://example.org/annotation/plate_01",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://iiif.example.org/tiles/plate_01/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 2000,
+                "width": 1400
+              },
+              "target": "https://example.org/canvas/plate_01"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://example.org/canvas/plate_02",
+      "type": "Canvas",
+      "label": {
+        "en": [
+          "Plate 2"
+        ]
+      },
+      "height": 2000,
+      "width": 1400,
+      "items": [
+        {
+          "id": "https://example.org/page/plate_02/1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://example.org/annotation/plate_02",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://iiif.example.org/tiles/plate_02/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 2000,
+                "width": 1400
+              },
+              "target": "https://example.org/canvas/plate_02"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://example.org/canvas/plate_03",
+      "type": "Canvas",
+      "label": {
+        "en": [
+          "Plate 3"
+        ]
+      },
+      "height": 2000,
+      "width": 1400,
+      "items": [
+        {
+          "id": "https://example.org/page/plate_03/1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://example.org/annotation/plate_03",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://iiif.example.org/tiles/plate_03/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 2000,
+                "width": 1400
+              },
+              "target": "https://example.org/canvas/plate_03"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://example.org/canvas/plate_04",
+      "type": "Canvas",
+      "label": {
+        "en": [
+          "Plate 4"
+        ]
+      },
+      "height": 2000,
+      "width": 1400,
+      "items": [
+        {
+          "id": "https://example.org/page/plate_04/1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://example.org/annotation/plate_04",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://iiif.example.org/tiles/plate_04/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 2000,
+                "width": 1400
+              },
+              "target": "https://example.org/canvas/plate_04"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://example.org/canvas/plate_05",
+      "type": "Canvas",
+      "label": {
+        "en": [
+          "Plate 5"
+        ]
+      },
+      "height": 2000,
+      "width": 1400,
+      "items": [
+        {
+          "id": "https://example.org/page/plate_05/1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://example.org/annotation/plate_05",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://iiif.example.org/tiles/plate_05/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 2000,
+                "width": 1400
+              },
+              "target": "https://example.org/canvas/plate_05"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://example.org/canvas/plate_06",
+      "type": "Canvas",
+      "label": {
+        "en": [
+          "Plate 6"
+        ]
+      },
+      "height": 2000,
+      "width": 1400,
+      "items": [
+        {
+          "id": "https://example.org/page/plate_06/1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://example.org/annotation/plate_06",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://iiif.example.org/tiles/plate_06/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 2000,
+                "width": 1400
+              },
+              "target": "https://example.org/canvas/plate_06"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://example.org/canvas/plate_07",
+      "type": "Canvas",
+      "label": {
+        "en": [
+          "Plate 7"
+        ]
+      },
+      "height": 2000,
+      "width": 1400,
+      "items": [
+        {
+          "id": "https://example.org/page/plate_07/1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://example.org/annotation/plate_07",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://iiif.example.org/tiles/plate_07/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 2000,
+                "width": 1400
+              },
+              "target": "https://example.org/canvas/plate_07"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://example.org/canvas/plate_08",
+      "type": "Canvas",
+      "label": {
+        "en": [
+          "Plate 8"
+        ]
+      },
+      "height": 2000,
+      "width": 1400,
+      "items": [
+        {
+          "id": "https://example.org/page/plate_08/1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://example.org/annotation/plate_08",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://iiif.example.org/tiles/plate_08/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 2000,
+                "width": 1400
+              },
+              "target": "https://example.org/canvas/plate_08"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://example.org/canvas/plate_09",
+      "type": "Canvas",
+      "label": {
+        "en": [
+          "Plate 9"
+        ]
+      },
+      "height": 2000,
+      "width": 1400,
+      "items": [
+        {
+          "id": "https://example.org/page/plate_09/1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://example.org/annotation/plate_09",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://iiif.example.org/tiles/plate_09/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 2000,
+                "width": 1400
+              },
+              "target": "https://example.org/canvas/plate_09"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://example.org/canvas/plate_10",
+      "type": "Canvas",
+      "label": {
+        "en": [
+          "Plate 10"
+        ]
+      },
+      "height": 2000,
+      "width": 1400,
+      "items": [
+        {
+          "id": "https://example.org/page/plate_10/1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://example.org/annotation/plate_10",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://iiif.example.org/tiles/plate_10/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 2000,
+                "width": 1400
+              },
+              "target": "https://example.org/canvas/plate_10"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://example.org/canvas/plate_11",
+      "type": "Canvas",
+      "label": {
+        "en": [
+          "Plate 11"
+        ]
+      },
+      "height": 2000,
+      "width": 1400,
+      "items": [
+        {
+          "id": "https://example.org/page/plate_11/1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://example.org/annotation/plate_11",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://iiif.example.org/tiles/plate_11/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 2000,
+                "width": 1400
+              },
+              "target": "https://example.org/canvas/plate_11"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://example.org/canvas/plate_12",
+      "type": "Canvas",
+      "label": {
+        "en": [
+          "Plate 12"
+        ]
+      },
+      "height": 2000,
+      "width": 1400,
+      "items": [
+        {
+          "id": "https://example.org/page/plate_12/1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://example.org/annotation/plate_12",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://iiif.example.org/tiles/plate_12/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 2000,
+                "width": 1400
+              },
+              "target": "https://example.org/canvas/plate_12"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://example.org/canvas/plate_13",
+      "type": "Canvas",
+      "label": {
+        "en": [
+          "Plate 13"
+        ]
+      },
+      "height": 2000,
+      "width": 1400,
+      "items": [
+        {
+          "id": "https://example.org/page/plate_13/1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://example.org/annotation/plate_13",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://iiif.example.org/tiles/plate_13/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 2000,
+                "width": 1400
+              },
+              "target": "https://example.org/canvas/plate_13"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://example.org/canvas/plate_14",
+      "type": "Canvas",
+      "label": {
+        "en": [
+          "Plate 14"
+        ]
+      },
+      "height": 2000,
+      "width": 1400,
+      "items": [
+        {
+          "id": "https://example.org/page/plate_14/1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://example.org/annotation/plate_14",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://iiif.example.org/tiles/plate_14/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 2000,
+                "width": 1400
+              },
+              "target": "https://example.org/canvas/plate_14"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://example.org/canvas/plate_15",
+      "type": "Canvas",
+      "label": {
+        "en": [
+          "Plate 15"
+        ]
+      },
+      "height": 2000,
+      "width": 1400,
+      "items": [
+        {
+          "id": "https://example.org/page/plate_15/1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://example.org/annotation/plate_15",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://iiif.example.org/tiles/plate_15/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 2000,
+                "width": 1400
+              },
+              "target": "https://example.org/canvas/plate_15"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://example.org/canvas/plate_16",
+      "type": "Canvas",
+      "label": {
+        "en": [
+          "Plate 16"
+        ]
+      },
+      "height": 2000,
+      "width": 1400,
+      "items": [
+        {
+          "id": "https://example.org/page/plate_16/1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://example.org/annotation/plate_16",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://iiif.example.org/tiles/plate_16/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 2000,
+                "width": 1400
+              },
+              "target": "https://example.org/canvas/plate_16"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://example.org/canvas/plate_17",
+      "type": "Canvas",
+      "label": {
+        "en": [
+          "Plate 17"
+        ]
+      },
+      "height": 2000,
+      "width": 1400,
+      "items": [
+        {
+          "id": "https://example.org/page/plate_17/1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://example.org/annotation/plate_17",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://iiif.example.org/tiles/plate_17/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 2000,
+                "width": 1400
+              },
+              "target": "https://example.org/canvas/plate_17"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://example.org/canvas/plate_18",
+      "type": "Canvas",
+      "label": {
+        "en": [
+          "Plate 18"
+        ]
+      },
+      "height": 2000,
+      "width": 1400,
+      "items": [
+        {
+          "id": "https://example.org/page/plate_18/1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://example.org/annotation/plate_18",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://iiif.example.org/tiles/plate_18/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 2000,
+                "width": 1400
+              },
+              "target": "https://example.org/canvas/plate_18"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://example.org/canvas/plate_19",
+      "type": "Canvas",
+      "label": {
+        "en": [
+          "Plate 19"
+        ]
+      },
+      "height": 2000,
+      "width": 1400,
+      "items": [
+        {
+          "id": "https://example.org/page/plate_19/1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://example.org/annotation/plate_19",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://iiif.example.org/tiles/plate_19/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 2000,
+                "width": 1400
+              },
+              "target": "https://example.org/canvas/plate_19"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://example.org/canvas/plate_20",
+      "type": "Canvas",
+      "label": {
+        "en": [
+          "Plate 20"
+        ]
+      },
+      "height": 2000,
+      "width": 1400,
+      "items": [
+        {
+          "id": "https://example.org/page/plate_20/1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://example.org/annotation/plate_20",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://iiif.example.org/tiles/plate_20/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 2000,
+                "width": 1400
+              },
+              "target": "https://example.org/canvas/plate_20"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://example.org/canvas/plate_21",
+      "type": "Canvas",
+      "label": {
+        "en": [
+          "Plate 21"
+        ]
+      },
+      "height": 2000,
+      "width": 1400,
+      "items": [
+        {
+          "id": "https://example.org/page/plate_21/1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://example.org/annotation/plate_21",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://iiif.example.org/tiles/plate_21/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 2000,
+                "width": 1400
+              },
+              "target": "https://example.org/canvas/plate_21"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://example.org/canvas/plate_22",
+      "type": "Canvas",
+      "label": {
+        "en": [
+          "Plate 22"
+        ]
+      },
+      "height": 2000,
+      "width": 1400,
+      "items": [
+        {
+          "id": "https://example.org/page/plate_22/1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://example.org/annotation/plate_22",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://iiif.example.org/tiles/plate_22/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 2000,
+                "width": 1400
+              },
+              "target": "https://example.org/canvas/plate_22"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://example.org/canvas/plate_23",
+      "type": "Canvas",
+      "label": {
+        "en": [
+          "Plate 23"
+        ]
+      },
+      "height": 2000,
+      "width": 1400,
+      "items": [
+        {
+          "id": "https://example.org/page/plate_23/1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://example.org/annotation/plate_23",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://iiif.example.org/tiles/plate_23/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 2000,
+                "width": 1400
+              },
+              "target": "https://example.org/canvas/plate_23"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "https://example.org/canvas/plate_24",
+      "type": "Canvas",
+      "label": {
+        "en": [
+          "Plate 24"
+        ]
+      },
+      "height": 2000,
+      "width": 1400,
+      "items": [
+        {
+          "id": "https://example.org/page/plate_24/1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://example.org/annotation/plate_24",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://iiif.example.org/tiles/plate_24/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 2000,
+                "width": 1400
+              },
+              "target": "https://example.org/canvas/plate_24"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

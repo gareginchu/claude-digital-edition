@@ -1,0 +1,23 @@
+---
+// This component lists available pre-rendered TEI HTML files from `site/html/`.
+import fs from 'fs';
+import path from 'path';
+
+const htmlDir = new URL('../../html', import.meta.url);
+let files = [];
+try {
+  files = fs.readdirSync(htmlDir).filter(f => f.endsWith('.html'));
+} catch (e) {
+  files = [];
+}
+---
+<div>
+  <h2>Pre-rendered TEI pages</h2>
+  <ul>
+    {files.length === 0 ? (
+      <li>No pre-rendered HTML found in /site/html</li>
+    ) : (
+      files.map(f => <li><a href={`/${f}`}>{f}</a></li>)
+    )}
+  </ul>
+</div>

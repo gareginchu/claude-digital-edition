@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="hy">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>374 
+
+ՄԻՋՆԱԴԱՐԱԳԻՏՈՒԹՅՈՒՆ 
+
+19 «Տօմարաց գիրք հայոց, հռօմայեցւոց և պարզատօմար, ընդ որոց և Տաղ Յովասափ</title>
+      </titleStmt>
+      <publicationStmt>
+        <p>Unpublished draft from Babken Chookaszian volume I extraction</p>
+      </publicationStmt>
+      <sourceDesc>
+        <p>Extracted from Babken_Chookaszian_Vol_I (2).pdf</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <div>
+        <head>Article 373</head>
+        <p>374 
+
+ՄԻՋՆԱԴԱՐԱԳԻՏՈՒԹՅՈՒՆ 
+
+19 «Տօմարաց գիրք հայոց, հռօմայեցւոց և պարզատօմար, ընդ որոց և Տաղ Յովասափու, մարմնախաղաց 
+և երազահան», Ամստերդամ, 1668, 260 էջ։ Այս գիրքը, համաձայն «Հայ հնատիպ գրքի», 4 հրատարակու-
+թյուն է ունեցել՝ 1668, 1668 (?), 1678 և 1696 թթ.։ Հայտնի չէ, թե սրանցից որն է եղել Եղիայի գրադարանում։ 
+20  Ստեփանոս  Ստեփանյան  Կամենցի,  Դուռն  ողորմութեան  Աստուծոյ  նուիրեցեալ  ամենապայծառի 
+խօճայ Սահրադի որդւոյ Մուրատին, Վենետիկ, տպ. Անտոն Բորտոլի, 1702, 294 էջ։ «Հայ հնատիպ գրքի 
+մատենա</p>
+        <note>Full text truncated for TEI draft. See article_373.txt for complete extraction.</note>
+      </div>
+    </body>
+  </text>
+</TEI>

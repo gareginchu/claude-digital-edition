@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="hy">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>502 
+
+ՄԻՋՆԱԴԱՐԱԳԻՏՈՒԹՅՈՒՆ 
+
+Է սայ ամէն ի մեր մեղաց, 
+Որ բարկացար Հայոց ազգաց։ 
+
+Ի թվականիս հայկազան </title>
+      </titleStmt>
+      <publicationStmt>
+        <p>Unpublished draft from Babken Chookaszian volume I extraction</p>
+      </publicationStmt>
+      <sourceDesc>
+        <p>Extracted from Babken_Chookaszian_Vol_I (2).pdf</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <div>
+        <head>Article 501</head>
+        <p>502 
+
+ՄԻՋՆԱԴԱՐԱԳԻՏՈՒԹՅՈՒՆ 
+
+Է սայ ամէն ի մեր մեղաց, 
+Որ բարկացար Հայոց ազգաց։ 
+
+Ի թվականիս հայկազան տաւմարիս ՌԾԳ ամին (1604) եւ փոքր թվականին Հռոմա-
+յեցւոց Մ. եւ ՂԲ. ամին, ի ժամանակիս, յորում Շահ Ապաս արքայն պարսից եկեալ պաշա-
+րեաց զԹաւրէզ եւ կոտորեաց զաւրս տաճկաց, քան զի գնացեալ էին Ալի փաշէն եւ ամե-
+նայն  զաւրս  տաճկացն  ի  Թարւիզոյ  ի  Նախչուանայ,  ի  յԵրեւանայ  ի  վերայ  Ղազի  բէկին  ի 
+Սալմաստ  եւ  ի  դառնալն  նոցա  զամենեսին  սրայխոհոհ  արարեալ  զնոսա  եւ  բազումք  ի 
+քրիստոնէիցն անդ կոտոր</p>
+        <note>Full text truncated for TEI draft. See article_501.txt for complete extraction.</note>
+      </div>
+    </body>
+  </text>
+</TEI>

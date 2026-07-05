@@ -1,9 +1,9 @@
-name: Python package
+name: Python package and tests
 
 on: [push]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -18,3 +18,9 @@ jobs:
     - name: Run tests
       run: |
         pytest -q
+    - name: Validate pipeline scripts
+      run: |
+        python -m py_compile pipeline/*.py
+        python -m py_compile site/*.py
+        python -m py_compile rag/*.py
+        python -m py_compile iiif/*.py

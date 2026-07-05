@@ -3,8 +3,8 @@
 from pathlib import Path
 
 def validate_toc(extracted_toc: str, printed_toc: str) -> bool:
-    e = Path(extracted_toc).read_text().strip()
-    p = Path(printed_toc).read_text().strip()
+    e = Path(extracted_toc).read_text(encoding='utf-8').strip()
+    p = Path(printed_toc).read_text(encoding='utf-8').strip()
     return e == p
 
 if __name__ == "__main__":

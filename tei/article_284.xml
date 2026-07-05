@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="hy">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>ՆՈՐԱՅԱՅՏ ԹԱՐԳՄԱՆՈՒԹԻՒՆ՝ ՁԻԱԲՈՒԾՈՒԹԵԱՆ ՄԱՍԻՆ! 
+
+Մեծանուն հայագէտ Փրոֆ. Հրաչեայ Աճառեանը 1906 թուին Իր</title>
+      </titleStmt>
+      <publicationStmt>
+        <p>Unpublished draft from Babken Chookaszian volume I extraction</p>
+      </publicationStmt>
+      <sourceDesc>
+        <p>Extracted from Babken_Chookaszian_Vol_I (2).pdf</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <div>
+        <head>Article 284</head>
+        <p>ՆՈՐԱՅԱՅՏ ԹԱՐԳՄԱՆՈՒԹԻՒՆ՝ ՁԻԱԲՈՒԾՈՒԹԵԱՆ ՄԱՍԻՆ! 
+
+Մեծանուն հայագէտ Փրոֆ. Հրաչեայ Աճառեանը 1906 թուին Իրանի Թաւրիզ քա-
+ղաքում տեսել ու նկարագրել է 13-րդ դարի մի եզակի անասնաբուժական մատեան, որը 
+հիացմունքով բնութագրել է որպէս «Նիւթով ու գրութեամբ պատուական ձեռագիր»։ 
+Փրոֆ. Աճառեանը, ինչպէս տեղեկանում ենք նրա յիշողութիւններից, ժամանակի սղու-
+թեան պատճառով «Բժշկարան ձիոյ եւ առհասարակ գրաստնոյ» կոչուող այս յուշար-
+ձանին ծանօթացել է հպանցիկ, ուստի միայն կարողացել է կատարել դրա նկարագրու-
+թիւնը եւ ընդօրի</p>
+        <note>Full text truncated for TEI draft. See article_284.txt for complete extraction.</note>
+      </div>
+    </body>
+  </text>
+</TEI>

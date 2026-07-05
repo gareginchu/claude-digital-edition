@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="hy">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>ԼԵԶՎԱԲԱՆՈՒԹՅՈՒՆ 
+
+77 
+
+նորին. որպէս 
+Ահէնկէր՝ երկա-
+թագործ. Զէր-
+կէր՝ ոսկէգործ. 
+քէֆշկէր՝ կոշ-
+կագոր</title>
+      </titleStmt>
+      <publicationStmt>
+        <p>Unpublished draft from Babken Chookaszian volume I extraction</p>
+      </publicationStmt>
+      <sourceDesc>
+        <p>Extracted from Babken_Chookaszian_Vol_I (2).pdf</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <div>
+        <head>Article 77</head>
+        <p>ԼԵԶՎԱԲԱՆՈՒԹՅՈՒՆ 
+
+77 
+
+նորին. որպէս 
+Ահէնկէր՝ երկա-
+թագործ. Զէր-
+կէր՝ ոսկէգործ. 
+քէֆշկէր՝ կոշ-
+կագործ. ըստ 
+այսմ է և բառն 
+պէրզիկէր որ է 
+սերմնագործ, 
+սերմնացան։ 
+
+Գեորգ Դպրի բառարանը արժեքավոր է նաև իր հանրագիտակ բնույթով. այստեղ 
+բացի սոսկ պարսկերեն բառերի նշանակություններից հարուստ նյութ է մեջբերված ար-
+ևելյան ժողովուրդների բանահյուսությունից, տեղեկություններ ու ծանոթագրություն-
+ներ են տրված պարսից գրականության մեջ հիշված վիպական ականավոր հերոսների մա-
+սին, կենսագրական ամփոփ տվյալներ են բերվա</p>
+        <note>Full text truncated for TEI draft. See article_077.txt for complete extraction.</note>
+      </div>
+    </body>
+  </text>
+</TEI>

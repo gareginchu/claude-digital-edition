@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="hy">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>Севругян  222 
+Севрюгян  262 
+Сейида  246 
+Сина  254 
+Смбат  158, 283, 288,290 
+Смирнов  149, 156, 1</title>
+      </titleStmt>
+      <publicationStmt>
+        <p>Unpublished draft from Babken Chookaszian volume I extraction</p>
+      </publicationStmt>
+      <sourceDesc>
+        <p>Extracted from Babken_Chookaszian_Vol_I (2).pdf</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <div>
+        <head>Article 520</head>
+        <p>Севругян  222 
+Севрюгян  262 
+Сейида  246 
+Сина  254 
+Смбат  158, 283, 288,290 
+Смирнов  149, 156, 157 
+Спандиар  154, 155, 156, 244, 258, 259 
+Спандиат  252 
+СПб  115, 156, 158 
+Срвандзтян  221 
+Средиземноморье  210 
+СССР  118, 125, 153, 364, 380, 408 
+Степанос  158, 347 
+Страбон  288 
+США  182, 283, 288, 290,     
+Табризи  254 
+Тавриз  241, 245, 246, 417, 288 
+Тарбиат  246, 260 
+Таронаци  158 
+Тахмасп  417 
+Ташкент  80, 182, 242, 264 
+Ташян  158 
+Тегеран  213, 218, 246, 260 
+Тер-Гевондян  283,</p>
+        <note>Full text truncated for TEI draft. See article_520.txt for complete extraction.</note>
+      </div>
+    </body>
+  </text>
+</TEI>

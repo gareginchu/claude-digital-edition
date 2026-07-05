@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="hy">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>ԱՆՎԱՆԱՑԱՆԿ 
+
+525 
+
+Արամյան  113, 233 
+Արայ  72, 168, 271 
+Արապեան  312 
+Արասլին  365 
+Արարատ  3, 4, </title>
+      </titleStmt>
+      <publicationStmt>
+        <p>Unpublished draft from Babken Chookaszian volume I extraction</p>
+      </publicationStmt>
+      <sourceDesc>
+        <p>Extracted from Babken_Chookaszian_Vol_I (2).pdf</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <div>
+        <head>Article 524</head>
+        <p>ԱՆՎԱՆԱՑԱՆԿ 
+
+525 
+
+Արամյան  113, 233 
+Արայ  72, 168, 271 
+Արապեան  312 
+Արասլին  365 
+Արարատ  3, 4, 87, 149, 157, 164, 364, 460 
+Արարատ-Էսքիջեան  3, 4 
+Արաքս  149, 234, 237 
+Արաքսը  149, 234 
+Արդաբիլ  146, 409 
+Արենի  508 
+Արզիման  507 
+Արզուման  329, 337, 498 
+Արզռում  502 
+Արթիկ  497, 498, 510 
+Արիստակես  166 
+Արիստակէս  269, 314 
+Արիստոտել  454, 455, 456, 492 
+Արծրունի  16, 63, 69, 151, 158, 165,  356 
+Արհանգ  143 
+Արճեշ  150 
+Արման  445, 458, 460, 467 
+Արմաշ  171 
+Արմենակ  506 
+Արմինե  482 
+</p>
+        <note>Full text truncated for TEI draft. See article_524.txt for complete extraction.</note>
+      </div>
+    </body>
+  </text>
+</TEI>

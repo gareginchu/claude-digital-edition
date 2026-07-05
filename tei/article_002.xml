@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="hy">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>Այս հատորը տպագրւում է «Գուրգէն Մէլիքեանի՝ Քաշաթաղի բազմազաւակ 
+ընտանիքների հիմնադրամի» հոգածութեամբ</title>
+      </titleStmt>
+      <publicationStmt>
+        <p>Unpublished draft from Babken Chookaszian volume I extraction</p>
+      </publicationStmt>
+      <sourceDesc>
+        <p>Extracted from Babken_Chookaszian_Vol_I (2).pdf</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <div>
+        <head>Article 2</head>
+        <p>Այս հատորը տպագրւում է «Գուրգէն Մէլիքեանի՝ Քաշաթաղի բազմազաւակ 
+ընտանիքների հիմնադրամի» հոգածութեամբ 
+
+ՉՈՒԳԱՍԶԵԱՆ  ԲԱԲԿԷՆ,  Երկերի  ժողովածու,  հատոր  Ա,  Երկրորդ՝  լրացված 
+հրատարակություն, Երեւան, 2023, 550 էջ + 24 էջ ներդիր։  
+Հատորի  մէջ  ներկայացւած  է  անւանի  հայագէտ-արեւելագէտ  Բաբկէն  Լեւոնի 
+Չուգասզեանի (1923-1997) յօդւածների մի մասը։ Հրատարակութեան նպատակն է ի մի 
+բերել գիտնականի գրաւոր Ժառանգութիւնը եւ վեր հանել նրա աշխատութիւնների կա-
+րեւորութիւնը հայագիտութեան եւ արեւելագիտութեան զ</p>
+        <note>Full text truncated for TEI draft. See article_002.txt for complete extraction.</note>
+      </div>
+    </body>
+  </text>
+</TEI>

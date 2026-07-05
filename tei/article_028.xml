@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="hy">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>ԲԱՌԱՐԱՆ! 
+(«Մկրտիչ Նաղաշ») 
+
+Բառարանը կազմելու համար հիմնականում օգտագործվել են՝  
+1. Աճառեան Հր., Հ</title>
+      </titleStmt>
+      <publicationStmt>
+        <p>Unpublished draft from Babken Chookaszian volume I extraction</p>
+      </publicationStmt>
+      <sourceDesc>
+        <p>Extracted from Babken_Chookaszian_Vol_I (2).pdf</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <div>
+        <head>Article 28</head>
+        <p>ԲԱՌԱՐԱՆ! 
+(«Մկրտիչ Նաղաշ») 
+
+Բառարանը կազմելու համար հիմնականում օգտագործվել են՝  
+1. Աճառեան Հր., Հայերէն արմատական բառարան, հ. Ա-Է, Երևան, 1927-1935։ 
+2. Աճառեան Հր., Թուրքերենէ փոխառեալ բառեր հայերէնի մէջ, «Էմինեան ազ-
+
+գագրական ժողովածու», հ. Գ, Մոսկուա-Վաղարշապատ, 1902։  
+
+3. Գէորգ Դպիր, Բառարան պարսկերէն ըստ կարգի հայկական այբուբենից… Կոս-
+
+տանդնուպօլիս, 1826: 
+
+4. Կարապետեան Պ. Զ., Մեծ բառարան օսմաներէնէ հայերէն, Կ. Պօլիս, 1912։ 
+5. Կիրակոսան Գ., Բառարան պարսկերէն-հայերէն, Թեհրան, 1933։ 
+</p>
+        <note>Full text truncated for TEI draft. See article_028.txt for complete extraction.</note>
+      </div>
+    </body>
+  </text>
+</TEI>

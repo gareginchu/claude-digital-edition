@@ -2,3 +2,4 @@ lxml
 requests
 pytest
 python-dotenv
+pdfminer.six

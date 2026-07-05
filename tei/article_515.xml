@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="hy">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>516 
+
+ԱՆՎԱՆԱՑԱՆԿ 
+
+Spantaძata  145 
+Spəntōdato  145 
+Stackelberg  120, 123, 128, 129 
+Step‘anos  165</title>
+      </titleStmt>
+      <publicationStmt>
+        <p>Unpublished draft from Babken Chookaszian volume I extraction</p>
+      </publicationStmt>
+      <sourceDesc>
+        <p>Extracted from Babken_Chookaszian_Vol_I (2).pdf</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <div>
+        <head>Article 515</head>
+        <p>516 
+
+ԱՆՎԱՆԱՑԱՆԿ 
+
+Spantaძata  145 
+Spəntōdato  145 
+Stackelberg  120, 123, 128, 129 
+Step‘anos  165, 297, 300 
+Strab  118, 293 
+Strassburg  86, 305 
+Sukias  488 
+Switzerlaud  487 
+Syrie  293, 294 
+T‘etał  165 
+T‘orgomean  301 
+T‘orgomyan  304 
+T‘ornik  163 
+T‘oros  294, 298, 301, 304 
+T‘ovma  165 
+Tabriz  292, 301, 302 
+Takayšvili  292, 299 
+Tamerlan  294,    
+Tarawnec‘woy  165 
+Taronaci  165 
+Tat‘ēosik  298 
+Tatosian  4 
+Taylor  487 
+Tbilissi  292 
+Téhéran  160, 161, 296 
+Ter-Łevondyan  294 
+T</p>
+        <note>Full text truncated for TEI draft. See article_515.txt for complete extraction.</note>
+      </div>
+    </body>
+  </text>
+</TEI>

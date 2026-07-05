@@ -24,6 +24,23 @@ NAME_STOPWORDS = {
     'ԲՈՎԱՆԴԱԿՈՒԹԻՒՆ',
 }
 
+NON_PERSON_SUFFIXES = {
+    'Գրադարանի',
+    'ԳՐԱԴԱՐԱՆԻ',
+    'Հայաստանի',
+    'Երևանի',
+    'Երեւանի',
+    'Պալատի',
+    'Համալսարանի',
+    'Ինստիտուտի',
+}
+
+TOPONYM_BIGRAMS = {
+    'Նյու Յորք',
+    'Երևան Հայաստան',
+    'Երեւան Հայաստան',
+}
+
 
 def _unique_preserve_order(items: List[str]) -> List[str]:
     seen = set()
@@ -34,6 +51,20 @@ def _unique_preserve_order(items: List[str]) -> List[str]:
         seen.add(item)
         out.append(item)
     return out
+
+
+def _is_non_person_candidate(candidate: str) -> bool:
+    if candidate in TOPONYM_BIGRAMS:
+        return True
+    tokens = candidate.split()
+    if not tokens:
+        return True
+    if tokens[-1] in NON_PERSON_SUFFIXES:
+        return True
+    # Dictionary/meta terms often leak into NER candidates.
+    if any(tok in {'Արաբերեն', 'Պարսկերեն', 'Հայերեն', 'Հայերէն'} for tok in tokens):
+        return True
+    return False
 
 def extract_armenian_names(text: str) -> List[str]:
     """Extract likely Armenian person names with stricter heuristics.
@@ -57,9 +88,28 @@ def extract_armenian_names(text: str) -> List[str]:
             continue
         if any(sw in tokens for sw in NAME_STOPWORDS):
             continue
+        if _is_non_person_candidate(cand):
+            continue
         filtered.append(cand)
 
-    return _unique_preserve_order(filtered)[:10]
+    names = _unique_preserve_order(filtered)
+
+    # Fallback pass for dictionary-like articles where precision filters can be too strict.
+    if len(names) < 3:
+        fallback_pattern = re.compile(
+            r'\b[Ա-Ֆ][ա-ֆև]{2,24}(?:\s+[Ա-Ֆ][ա-ֆև]{2,24})\b'
+        )
+        fallback_candidates = [c.strip() for c in fallback_pattern.findall(normalized)]
+        for cand in fallback_candidates:
+            if len(cand) > 40:
+                continue
+            if _is_non_person_candidate(cand):
+                continue
+            if any(sw in cand.split() for sw in NAME_STOPWORDS):
+                continue
+            names.append(cand)
+
+    return _unique_preserve_order(names)[:10]
 
 def detect_manuscript_refs(text: str) -> List[Dict]:
     """Detect Matenadaran and foreign manuscript references."""

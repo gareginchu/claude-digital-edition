@@ -1,5 +1,10 @@
-"""TEI enrichment: NER, entity linking to Wikidata, manuscript reference detection."""
+"""TEI enrichment: NER, entity linking to Wikidata, manuscript reference detection.
+
+Defaults to enriching article_001..article_055 and skips back matter files unless
+--include-backmatter is explicitly passed.
+"""
 import re
+import argparse
 from pathlib import Path
 from typing import List, Dict, Tuple
 from lxml import etree
@@ -88,19 +93,56 @@ def enrich_tei_with_standoff(tei_file: str, out_file: str):
     Path(out_file).write_text(xml_str, encoding='utf-8')
     print(f'Enriched: {Path(tei_file).name} -> {Path(out_file).name} (found {len(names)} names, {len(ms_refs)} ms refs)')
 
-def batch_enrich(tei_dir: str, out_dir: str):
-    """Batch enrich all TEI files with standOff."""
+
+def _article_number_from_name(file_name: str):
+    m = re.fullmatch(r'article_(\d{3})\.xml', file_name)
+    if not m:
+        return None
+    return int(m.group(1))
+
+
+def batch_enrich(tei_dir: str, out_dir: str, include_backmatter: bool = False, start_article: int = 1, end_article: int = 55):
+    """Batch enrich TEI files with standOff.
+
+    By default only enriches article_001..article_055.
+    """
     Path(out_dir).mkdir(parents=True, exist_ok=True)
+    total = 0
+    processed = 0
+    skipped = 0
     for tei_file in sorted(Path(tei_dir).glob('*.xml')):
+        total += 1
+        article_num = _article_number_from_name(tei_file.name)
+        if article_num is None:
+            if not include_backmatter:
+                skipped += 1
+                print(f'Skipping non-article TEI: {tei_file.name}')
+                continue
+        elif not include_backmatter and not (start_article <= article_num <= end_article):
+            skipped += 1
+            print(f'Skipping back matter candidate: {tei_file.name}')
+            continue
+
         out_file = Path(out_dir) / tei_file.name
         try:
             enrich_tei_with_standoff(str(tei_file), str(out_file))
+            processed += 1
         except Exception as e:
             print(f'Error enriching {tei_file.name}: {e}')
+    print(f'Enrichment summary: processed={processed}, skipped={skipped}, total={total}')
 
 if __name__ == '__main__':
-    import sys
-    if len(sys.argv) < 3:
-        print('Usage: enrich_tei.py tei_dir output_dir')
-    else:
-        batch_enrich(sys.argv[1], sys.argv[2])
+    parser = argparse.ArgumentParser(description='Enrich TEI files with standOff entities/manuscript refs.')
+    parser.add_argument('tei_dir', help='Input TEI directory')
+    parser.add_argument('output_dir', help='Output directory for enriched TEI')
+    parser.add_argument('--include-backmatter', action='store_true', help='Also enrich files outside article_001..article_055')
+    parser.add_argument('--start-article', type=int, default=1, help='First article number to enrich (default: 1)')
+    parser.add_argument('--end-article', type=int, default=55, help='Last article number to enrich (default: 55)')
+    args = parser.parse_args()
+    batch_enrich(
+        args.tei_dir,
+        args.output_dir,
+        include_backmatter=args.include_backmatter,
+        start_article=args.start_article,
+        end_article=args.end_article,
+    )

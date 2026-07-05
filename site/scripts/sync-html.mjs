@@ -1,34 +1,38 @@
+// Prebuild helper. The article dynamic route (src/pages/articles/[slug].astro)
+// reads fragments straight out of site/html/ at build time, so no copy is
+// needed there. This script exists to stage the IIIF manifest under public/
+// so Clover can fetch it at runtime, and to stage backmatter txt files for
+// direct download.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const siteDir = path.resolve(__dirname, '..');
-const sourceDir = path.join(siteDir, 'html');
-const publicArticlesDir = path.join(siteDir, 'public', 'articles');
-const sourceBackmatterDir = path.resolve(siteDir, '..', 'pipeline', 'backmatter');
-const publicBackmatterDir = path.join(siteDir, 'public', 'backmatter');
+const repoRoot = path.resolve(siteDir, '..');
 
-fs.mkdirSync(publicArticlesDir, { recursive: true });
-fs.mkdirSync(publicBackmatterDir, { recursive: true });
+const publicDir = path.join(siteDir, 'public');
+fs.mkdirSync(publicDir, { recursive: true });
 
-if (!fs.existsSync(sourceDir)) {
-  console.log('No site/html directory found; skipping article sync.');
-  process.exit(0);
+// 1. IIIF manifest → public/iiif/manifest.json for Clover's runtime fetch.
+const manifestSrc = path.join(repoRoot, 'iiif', 'manifests', 'manifest.json');
+const manifestDstDir = path.join(publicDir, 'iiif');
+if (fs.existsSync(manifestSrc)) {
+  fs.mkdirSync(manifestDstDir, { recursive: true });
+  fs.copyFileSync(manifestSrc, path.join(manifestDstDir, 'manifest.json'));
+  console.log('Staged IIIF manifest → public/iiif/manifest.json');
+} else {
+  console.log('No IIIF manifest found at', manifestSrc, '; skipping.');
 }
 
-for (const entry of fs.readdirSync(sourceDir)) {
-  if (!entry.endsWith('.html')) continue;
-  fs.copyFileSync(path.join(sourceDir, entry), path.join(publicArticlesDir, entry));
-}
-
-if (fs.existsSync(sourceBackmatterDir)) {
-  for (const entry of fs.readdirSync(sourceBackmatterDir)) {
+// 2. Backmatter txt files → public/backmatter/ for direct-download links.
+const bmSrc = path.join(repoRoot, 'pipeline', 'backmatter');
+const bmDst = path.join(publicDir, 'backmatter');
+if (fs.existsSync(bmSrc)) {
+  fs.mkdirSync(bmDst, { recursive: true });
+  for (const entry of fs.readdirSync(bmSrc)) {
     if (!entry.endsWith('.txt')) continue;
-    fs.copyFileSync(path.join(sourceBackmatterDir, entry), path.join(publicBackmatterDir, entry));
+    fs.copyFileSync(path.join(bmSrc, entry), path.join(bmDst, entry));
   }
+  console.log('Staged backmatter txt files → public/backmatter/');
 }
-
-console.log('Synced pre-rendered article HTML and backmatter text into site/public');

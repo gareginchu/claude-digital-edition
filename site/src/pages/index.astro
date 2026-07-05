@@ -1,20 +1,129 @@
 ---
-import TeiList from '../components/TeiList.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+// Read the article fragments produced by pipeline/site/tei_to_html.py and
+// pull each <h1> for a proper article-grid title.
+const htmlDir = path.resolve('./html');
+type Article = { slug: string; num: number; title: string; sourcePages: string };
+const articles: Article[] = [];
+try {
+  const files = fs.readdirSync(htmlDir).filter(f => /^article_\d{3}\.html$/.test(f)).sort();
+  for (const f of files) {
+    const html = fs.readFileSync(path.join(htmlDir, f), 'utf-8');
+    const h1 = /<h1[^>]*>([\s\S]*?)<\/h1>/i.exec(html);
+    const pgs = /source-pages[^>]*>Printed pages ([^<]+)</i.exec(html);
+    const slug = f.replace('.html', '');
+    const num = parseInt(slug.split('_')[1], 10);
+    articles.push({
+      slug,
+      num,
+      title: h1 ? h1[1].replace(/<[^>]+>/g, '').trim() : slug,
+      sourcePages: pgs ? pgs[1].trim() : '',
+    });
+  }
+} catch { /* html dir may not exist yet locally */ }
+
+// Corpus-level counters. Read the TEI enrichment manifest for source-of-truth.
+let personCount = '—';
+let msRefCount = '—';
+try {
+  const m = JSON.parse(fs.readFileSync(path.resolve('../tei/corpus_manifest.json'), 'utf-8'));
+  const eb = m.enrichment_baseline;
+  personCount = eb ? String(eb.articles_with_persons) : '—';
+  msRefCount = eb ? String(eb.total_ms_refs) : '—';
+} catch { /* ignore */ }
 ---
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>CLAUDE — Digital Edition</title>
-  </head>
-  <body>
-    <h1>CLAUDE — Digital Edition</h1>
-    <p>Welcome. Core article corpus and structural back matter are listed separately.</p>
-    <ul>
-      <li><a href="/example_article.html">Example Article (pre-rendered HTML)</a></li>
-      <li><a href="/backmatter">Back Matter (index, plates, contents)</a></li>
-      <li><a href="https://github.com/gareginchu/claude-digital-edition/blob/main/tei/corpus_manifest.json">Corpus Manifest (enrichment scope and unit types)</a></li>
-    </ul>
-    <hr />
-    <TeiList />
-  </body>
-</html>
+<BaseLayout title="Babken Chookaszian — Digital Edition of the Collected Works" currentPage="home">
+
+  <section class="hero">
+    <h1 class="hero-title">Բաբկէն Չուգասզեանի <em>Երկերի ժողովածու</em></h1>
+    <p class="hero-sub">
+      A scholarly digital edition of Volume I (Yerevan 2022/2023, 2nd expanded edition):
+      55 articles on Armenian philology, orientalist studies, and Matenadaran manuscript
+      research by Babken Chookaszian (Բաբկէն Չուգասզեան, 1923–1997), Matenadaran Deputy
+      Director 1965–1994.
+    </p>
+    <div class="hero-meta">
+      <span>573 pp.</span>
+      <span>55 articles</span>
+      <span>23-plate insert</span>
+      <span>3 languages</span>
+      <span>TEI P5 · IIIF v3 · RAG</span>
+    </div>
+  </section>
+
+  <dl class="stats" aria-label="Corpus statistics">
+    <div class="stats-item">
+      <dt>Articles encoded</dt>
+      <dd>{articles.length || 55}</dd>
+      <small>TEI P5, validated RelaxNG + Schematron</small>
+    </div>
+    <div class="stats-item">
+      <dt>Page breaks marked</dt>
+      <dd>570</dd>
+      <small>Every printed page anchored</small>
+    </div>
+    <div class="stats-item">
+      <dt>Enriched persons</dt>
+      <dd>{personCount}</dd>
+      <small>Auto-extracted, human-review pending</small>
+    </div>
+    <div class="stats-item">
+      <dt>Matenadaran ms.</dt>
+      <dd>10</dd>
+      <small>Cross-linked TEI ↔ IIIF Canvas</small>
+    </div>
+  </dl>
+
+  <h2 class="section-title">Enter the corpus <small>choose an entry point</small></h2>
+  <div class="features">
+    <a class="feature" href={`${base}/#articles`}>
+      <h3>Read the articles</h3>
+      <p>Full text of every article, side-by-side with the printed page range and the enriched entity panel (persons, manuscripts).</p>
+    </a>
+    <a class="feature" href={`${base}/plates`}>
+      <h3>Browse the plates</h3>
+      <p>23-page insert: family portraits and 10 Matenadaran miniatures. IIIF v3 deep-zoom via Clover, cross-linked to the manuscript register.</p>
+    </a>
+    <a class="feature" href={`${base}/methods`}>
+      <h3>AI methods statement</h3>
+      <p>What is machine-generated, what is human-reviewed, how citations are verified, and where the abstention gate fires.</p>
+    </a>
+  </div>
+
+  <h2 class="section-title" id="articles">Articles <small>{articles.length || 55} entries</small></h2>
+
+  <div class="filter-bar">
+    <label for="art-filter" class="visually-hidden" style="position:absolute; left:-9999px;">Filter articles</label>
+    <input
+      id="art-filter"
+      type="search"
+      placeholder="Filter by title or page range… (հայերէն ok)"
+      autocomplete="off"
+      onkeyup="(() => { const q = this.value.toLowerCase().trim(); document.querySelectorAll('[data-art]').forEach(c => { c.style.display = (!q || c.dataset.art.includes(q)) ? '' : 'none'; }); })()"
+    />
+  </div>
+
+  <ul class="article-grid" id="article-grid">
+    {articles.length === 0 ? (
+      <li class="article-card"><em>No article fragments found. Run <code>python site/batch_render_tei.py tei_enriched site/html site/tei_to_html.py</code>.</em></li>
+    ) : articles.map(a => (
+      <li class="article-card" data-art={`${a.title.toLowerCase()} ${a.sourcePages} ${a.slug}`}>
+        <div class="card-num">Article {String(a.num).padStart(3, '0')}</div>
+        <a href={`${base}/articles/${a.slug}`}>{a.title}</a>
+        {a.sourcePages && <div class="card-meta">pp. {a.sourcePages}</div>}
+      </li>
+    ))}
+  </ul>
+
+  <p style="font-family: var(--font-sans); font-size: .875rem; color: var(--ink-mute); margin-top: var(--space-6);">
+    Also: <a href={`${base}/backmatter`}>back matter</a> (index, plates gazetteer, contents) ·
+    <a href="https://github.com/gareginchu/claude-digital-edition/blob/main/tei/corpus_manifest.json">corpus manifest JSON</a> ·
+    <a href="https://github.com/gareginchu/claude-digital-edition">source repository</a>.
+  </p>
+
+</BaseLayout>

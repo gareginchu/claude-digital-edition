@@ -1,0 +1,94 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  lang?: string;
+  currentPage?: 'home' | 'articles' | 'plates' | 'methods' | 'about';
+}
+
+const {
+  title,
+  description = 'Digital scholarly edition of Babken Chookaszian, Collected Works Volume I.',
+  lang = 'en',
+  currentPage,
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const nav = [
+  { key: 'home',     href: `${base}/`,          en: 'Home',           hy: 'Գլխաւոր' },
+  { key: 'articles', href: `${base}/#articles`, en: 'Articles',       hy: 'Յօդւածներ' },
+  { key: 'plates',   href: `${base}/plates`,    en: 'Plates',         hy: 'Լուսանկարներ' },
+  { key: 'methods',  href: `${base}/methods`,   en: 'AI methods',     hy: 'ՄԺ մեթոդներ' },
+  { key: 'about',    href: `${base}/about`,     en: 'About',          hy: 'Մասին' },
+];
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Armenian:wght@400;600;700&family=Noto+Sans+Armenian:wght@400;500;600&display=swap" />
+    <meta property="og:title" content={title} />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content={description} />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <div class="rights-ribbon" role="note">
+      Pre-launch preview. Article text © Levon and Garegin Chugaszyan (in-copyright in Armenia until 2067). Plates require per-image clearance before publication.
+    </div>
+
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="site-brand" href={`${base}/`}>
+          Բ. Չուգասզեան <em>·</em> <span style="font-family: var(--font-sans); font-weight: 500; font-size: .95rem;">Երկերի ժողովածու Ա</span>
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          {nav.map(item => (
+            <a href={item.href} aria-current={currentPage === item.key ? 'page' : undefined} lang="en">
+              {item.en}
+            </a>
+          ))}
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer-inner">
+        <div>
+          <h4>Volume</h4>
+          <p style="margin:0;">Babken Chookaszian, <em>Collected Works Volume I</em> — Yerevan 2022/2023 (2nd expanded edition). 573 pp., 55 articles, 23-page plates insert.</p>
+        </div>
+        <div>
+          <h4>Rights</h4>
+          <ul>
+            <li>Article text: © Levon and Garegin Chugaszyan</li>
+            <li>Plates: pending Matenadaran clearance</li>
+            <li>New metadata + code: CC BY 4.0</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Infrastructure</h4>
+          <ul>
+            <li>TEI P5 (validated: RelaxNG + Schematron)</li>
+            <li>IIIF v3 (Presentation 3, Image 3)</li>
+            <li>RAG: BM25 + BGE-M3 hybrid, Claude Citations API</li>
+            <li><a href="https://github.com/gareginchu/claude-digital-edition">Source on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

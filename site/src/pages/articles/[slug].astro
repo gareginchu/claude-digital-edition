@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+export async function getStaticPaths() {
+  const htmlDir = path.resolve('./html');
+  let files: string[] = [];
+  try {
+    files = fs.readdirSync(htmlDir).filter(f => /^article_\d{3}\.html$/.test(f)).sort();
+  } catch {
+    return [];
+  }
+  return files.map((f, i, arr) => {
+    const slug = f.replace('.html', '');
+    const prev = i > 0 ? arr[i - 1].replace('.html', '') : null;
+    const next = i < arr.length - 1 ? arr[i + 1].replace('.html', '') : null;
+    return { params: { slug }, props: { prev, next } };
+  });
+}
+
+const { slug } = Astro.params as { slug: string };
+const { prev, next } = Astro.props as { prev: string | null; next: string | null };
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const fragmentPath = path.resolve('./html', `${slug}.html`);
+const fragment = fs.readFileSync(fragmentPath, 'utf-8');
+
+// Extract the article <h1> for <title> + og:title.
+const h1 = /<h1[^>]*>([\s\S]*?)<\/h1>/i.exec(fragment);
+const title = h1 ? h1[1].replace(/<[^>]+>/g, '').trim() : slug;
+---
+<BaseLayout title={`${title} — Chookaszian Vol. I`} currentPage="articles" lang="hy">
+
+  <div set:html={fragment} />
+
+  <nav class="article-nav" aria-label="Article navigation">
+    {prev ? (
+      <a class="prev" href={`${base}/articles/${prev}`} rel="prev">Previous ({prev.replace('article_', '')})</a>
+    ) : <span></span>}
+    <a href={`${base}/#articles`}>All articles</a>
+    {next ? (
+      <a class="next" href={`${base}/articles/${next}`} rel="next">Next ({next.replace('article_', '')})</a>
+    ) : <span></span>}
+  </nav>
+
+</BaseLayout>

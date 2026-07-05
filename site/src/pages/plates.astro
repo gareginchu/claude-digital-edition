@@ -10,23 +10,17 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
 const repoRoot = path.resolve(process.cwd(), '..');
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
-// Locate the manifest. Prefer a public/ copy if present (recommended for
-// deployment); otherwise fall back to reading iiif/manifests/manifest.json
-// directly from the worktree.
 const manifestCandidates = [
   path.join(process.cwd(), 'public', 'iiif', 'manifest.json'),
   path.join(repoRoot, 'iiif', 'manifests', 'manifest.json'),
 ];
 const manifestPath = manifestCandidates.find((p) => fs.existsSync(p));
-
-// The URL under which the manifest is served at runtime. Astro serves the
-// `public/` tree at the site root, so if we copy the manifest into
-// `site/public/iiif/manifest.json` it will be reachable at `/iiif/manifest.json`.
-// The `manifestUrl` value below is what Clover fetches; edit for deployment.
-const manifestUrl = '/iiif/manifest.json';
+const manifestUrl = `${base}/iiif/manifest.json`;
 
 let manifest: any = null;
 let canvases: any[] = [];
@@ -39,7 +33,7 @@ if (manifestPath) {
     manifestError = `Failed to parse ${manifestPath}: ${err.message}`;
   }
 } else {
-  manifestError = 'IIIF manifest not found. Run `python iiif/create_manifest.py` and copy iiif/manifests/manifest.json to site/public/iiif/manifest.json.';
+  manifestError = 'IIIF manifest not found. Run `python iiif/create_manifest.py` and copy the result to site/public/iiif/manifest.json.';
 }
 
 const pick = (labelObj: any, lang: string = 'en'): string => {
@@ -51,142 +45,82 @@ const pick = (labelObj: any, lang: string = 'en'): string => {
 const summary = pick(manifest?.summary);
 const title = pick(manifest?.label) || 'Plates insert';
 ---
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Plates | Chookaszian Collected Works Vol. I</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style>
-      body {
-        max-width: 1100px;
-        margin: 2rem auto;
-        padding: 0 1rem;
-        font-family: 'Noto Serif Armenian', 'Noto Serif', Georgia, serif;
-        line-height: 1.55;
-        color: #222;
-      }
-      h1 { margin-bottom: 0.25rem; }
-      .lang-hy { font-family: 'Noto Serif Armenian', 'Noto Sans Armenian', serif; }
-      .rights-banner {
-        border: 1px solid #b58900;
-        background: #fdf6e3;
-        padding: 0.75rem 1rem;
-        margin: 1rem 0;
-        border-radius: 4px;
-      }
-      .rights-banner strong { color: #b58900; }
-      #clover-container {
-        min-height: 640px;
-        border: 1px solid #ddd;
-        margin-top: 1rem;
-      }
-      #clover-fallback ol { list-style: decimal inside; }
-      #clover-fallback li {
-        display: flex;
-        align-items: flex-start;
-        gap: 1rem;
-        border-top: 1px solid #eee;
-        padding: 0.75rem 0;
-      }
-      #clover-fallback img {
-        max-width: 128px;
-        height: auto;
-        border: 1px solid #ccc;
-      }
-      #clover-fallback .caption { flex: 1; }
-      .meta { color: #555; font-size: 0.9rem; }
-    </style>
-  </head>
-  <body>
-    <p><a href="/">&larr; Home</a></p>
-    <h1>{title}</h1>
-    {summary ? <p class="meta">{summary}</p> : null}
+<BaseLayout title="Plates — Chookaszian Vol. I" currentPage="plates">
 
-    <aside class="rights-banner">
-      <p><strong>Rights notice.</strong> The plates on this page reproduce material
-      from the printed Yerevan 2022/2023 edition (© Levon and Garegin Chugaszyan).
-      Miniatures originate from Matenadaran manuscripts and require per-image
-      clearance. <em>Public visibility: pending rights clearance.</em>
-      Do not redistribute the tile assets or manifest URLs outside of internal
-      review contexts until the heirs' licence and Matenadaran clearances are
-      signed. See <code>rights/</code>.</p>
-    </aside>
+  <h1 style="font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.15; margin: 0 0 var(--space-3);">Plates</h1>
+  {summary ? <p style="max-width: var(--measure); font-family: var(--font-sans); color: var(--ink-soft);">{summary}</p> : null}
 
-    {manifestError ? (
-      <p class="meta"><strong>Manifest unavailable.</strong> {manifestError}</p>
-    ) : (
-      <>
-        <p class="meta">Manifest URL passed to Clover: <code>{manifestUrl}</code>
-        &middot; canvases: {canvases.length}</p>
+  <aside style="background: var(--accent-tint); border-left: 4px solid var(--accent); padding: var(--space-4); margin: var(--space-5) 0; border-radius: var(--radius); font-family: var(--font-sans); font-size: .9rem;">
+    <strong style="color: var(--accent);">Rights notice.</strong> These plates reproduce material
+    from the printed Yerevan 2022/2023 edition (© Levon and Garegin Chugaszyan). The 10 miniatures
+    originate from Matenadaran manuscripts and require per-image clearance.
+    <em>Public visibility: pending rights clearance.</em>
+    Do not redistribute tile assets or manifest URLs outside internal review contexts.
+  </aside>
 
-        {/* Clover embed. The <clover-iiif> web-component is registered by the
-            ESM bundle we import below. */}
-        <div id="clover-container">
-          <clover-iiif iiifContent={manifestUrl} viewerConfig='{"informationPanel":{"open":true,"renderAbout":true}}'></clover-iiif>
-        </div>
+  {manifestError ? (
+    <p style="font-family: var(--font-sans); color: var(--ink-mute);"><strong>Manifest unavailable.</strong> {manifestError}</p>
+  ) : (
+    <>
+      <p style="font-family: var(--font-sans); font-size: .875rem; color: var(--ink-mute);">
+        Manifest: <code>{manifestUrl}</code> — {canvases.length} canvases
+      </p>
 
-        <script type="module" is:inline>
-          // Clover IIIF ships as an ESM web component. We load from a CDN so
-          // no npm install is required for local review. Replace with a
-          // vendored copy or an npm-installed dependency before production.
-          // If the CDN is unreachable, the JS-free fallback below is shown.
-          const CLOVER_SRC = 'https://esm.sh/@samvera/clover-iiif@2.14.4?bundle';
-          import(CLOVER_SRC)
-            .then(() => {
-              const fb = document.getElementById('clover-fallback');
-              if (fb) fb.setAttribute('data-viewer-loaded', 'true');
-            })
-            .catch((err) => {
-              console.error('Clover failed to load; falling back:', err);
-              const el = document.getElementById('clover-container');
-              if (el) el.innerHTML = '<p class="meta">Viewer unavailable (Clover CDN not reachable). See list below.</p>';
-            });
-        </script>
-      </>
-    )}
-
-    <h2>Plate index (JavaScript-free)</h2>
-    <p class="meta">Static list mirroring the manifest. Each thumbnail is the
-    256px width variant; clicking a plate opens the full-resolution JPEG.
-    This section is always rendered so the page satisfies the project's
-    Endings-Principles / WCAG 2.2 AA requirement of full readability without JS.</p>
-
-    {canvases.length === 0 ? (
-      <p><em>No canvases found. Run the extraction and manifest scripts:</em></p>
-      <pre>python iiif/extract_plates.py &amp;&amp; python iiif/build_tiles.py &amp;&amp; python iiif/create_manifest.py</pre>
-    ) : (
-      <div id="clover-fallback">
-        <ol>
-          {canvases.map((c: any) => {
-            const label = pick(c.label);
-            const captionArm = pick(
-              c.metadata?.find((m: any) => pick(m.label)?.startsWith('Caption'))?.value,
-              'hy',
-            );
-            const pageMeta = pick(
-              c.metadata?.find((m: any) => pick(m.label)?.startsWith('Source page'))?.value,
-              'none',
-            );
-            // Use the canvas thumbnail as declared in the manifest.
-            const thumbId = c.thumbnail?.[0]?.id;
-            // Full-image URL points to the level-0 max variant.
-            const bodyId = c.items?.[0]?.items?.[0]?.body?.id;
-            return (
-              <li id={`plate-${c.id.split('/').pop()}`}>
-                {thumbId ? <a href={bodyId}><img src={thumbId} alt={label} loading="lazy" /></a> : null}
-                <div class="caption">
-                  <strong>{label}</strong>
-                  <div class="meta">{pageMeta}</div>
-                  <p class="lang-hy" lang="hy">{captionArm}</p>
-                  <p class="meta">
-                    <a href={bodyId}>Full-resolution JPEG</a>
-                  </p>
-                </div>
-              </li>
-            );
-          })}
-        </ol>
+      <div id="clover-container" style="min-height: 640px; border: 1px solid var(--rule); margin-top: var(--space-4); background: white; border-radius: var(--radius);">
+        <clover-iiif iiifContent={manifestUrl} viewerConfig='{"informationPanel":{"open":true,"renderAbout":true}}'></clover-iiif>
       </div>
-    )}
-  </body>
-</html>
+
+      <script type="module" is:inline>
+        const CLOVER_SRC = 'https://esm.sh/@samvera/clover-iiif@2.14.4?bundle';
+        import(CLOVER_SRC).catch((err) => {
+          console.error('Clover failed to load; falling back:', err);
+          const el = document.getElementById('clover-container');
+          if (el) el.innerHTML = '<p style="padding: 2rem; color: var(--ink-mute); font-family: var(--font-sans);">Viewer unavailable (Clover CDN not reachable). See the accessible list below.</p>';
+        });
+      </script>
+    </>
+  )}
+
+  <h2 class="section-title">Plate index <small>JavaScript-free · WCAG-friendly</small></h2>
+  <p style="max-width: var(--measure); font-family: var(--font-sans); font-size: .9rem; color: var(--ink-soft);">
+    Every canvas from the manifest, mirrored as an accessible static list. Each thumbnail is the 256-px width variant;
+    click a plate to open the full-resolution JPEG. Rendered even when Clover is unavailable.
+  </p>
+
+  {canvases.length === 0 ? (
+    <p style="font-family: var(--font-sans); color: var(--ink-mute);"><em>No canvases found. Run the extraction and manifest scripts:</em></p>
+    <pre style="background: var(--paper-alt); padding: var(--space-4); border: 1px solid var(--rule); border-radius: var(--radius); font-family: var(--font-mono); font-size: .85rem;">python iiif/extract_plates.py &amp;&amp; python iiif/build_tiles.py &amp;&amp; python iiif/create_manifest.py</pre>
+  ) : (
+    <ol style="list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));">
+      {canvases.map((c: any) => {
+        const label = pick(c.label);
+        const captionArm = pick(
+          c.metadata?.find((m: any) => pick(m.label)?.startsWith('Caption'))?.value,
+          'hy',
+        );
+        const pageMeta = pick(
+          c.metadata?.find((m: any) => pick(m.label)?.startsWith('Source page'))?.value,
+          'none',
+        );
+        const thumbId = c.thumbnail?.[0]?.id;
+        const bodyId = c.items?.[0]?.items?.[0]?.body?.id;
+        const seeAlsoTei = c.seeAlso?.find((s: any) => s.format?.includes('tei+xml'))?.id;
+        return (
+          <li id={`plate-${c.id.split('/').pop()}`} style="background: white; border: 1px solid var(--rule); border-radius: var(--radius); padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-3);">
+            {thumbId ? <a href={bodyId} style="align-self: center;"><img src={thumbId} alt={label} loading="lazy" style="max-width: 100%; height: auto; border: 1px solid var(--rule); border-radius: var(--radius);" /></a> : null}
+            <div>
+              <strong style="font-family: var(--font-serif); font-size: 1.05rem;">{label}</strong>
+              <div style="font-family: var(--font-sans); font-size: .8rem; color: var(--ink-mute); margin-top: var(--space-1);">{pageMeta}</div>
+              <p lang="hy" style="font-family: var(--font-serif); margin-top: var(--space-3); font-size: .95rem;">{captionArm}</p>
+              <p style="font-family: var(--font-sans); font-size: .8rem; margin-top: var(--space-3);">
+                <a href={bodyId}>Full-resolution JPEG</a>
+                {seeAlsoTei && <> · <a href={seeAlsoTei}>TEI msDesc</a></>}
+              </p>
+            </div>
+          </li>
+        );
+      })}
+    </ol>
+  )}
+
+</BaseLayout>

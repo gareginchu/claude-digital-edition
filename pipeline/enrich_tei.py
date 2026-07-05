@@ -15,14 +15,51 @@ NS = {'tei': 'http://www.tei-c.org/ns/1.0'}
 MATENADARAN_PATTERN = r'(?:Մատենադարան|Matenadaran)\s+(?:ձեռ\.|ms\.|MS\.)\s*(\d+)'
 FOREIGN_MS_PATTERN = r'(?:British Library|BL|Bodleian|Vatican|BNF|Ms\.|MS\.|fol\.|f\.)[\s\w\d\-\.]*'
 
+NAME_STOPWORDS = {
+    'ԲԱՌԱՐԱՆ',
+    'ԵՐԱԽՏԱԳԻՏՈՒԹԵԱՆ',
+    'ԽՕՍՔ',
+    'ԼԵԶՎԱԲԱՆՈՒԹՅՈՒՆ',
+    'ԱՆՎԱՆԱՑԱՆԿ',
+    'ԲՈՎԱՆԴԱԿՈՒԹԻՒՆ',
+}
+
+
+def _unique_preserve_order(items: List[str]) -> List[str]:
+    seen = set()
+    out = []
+    for item in items:
+        if item in seen:
+            continue
+        seen.add(item)
+        out.append(item)
+    return out
+
 def extract_armenian_names(text: str) -> List[str]:
-    """Extract likely Armenian person names (simple heuristic)."""
-    # Armenian script: U+0530–U+058F
-    name_pattern = r'[\u0530-\u058F]+(?:\s+[\u0530-\u058F]+)*'
-    names = re.findall(name_pattern, text)
-    # Filter: names with 2+ words and reasonable length
-    names = [n for n in names if len(n.split()) >= 2 and len(n) > 5]
-    return names[:10]  # Limit to top 10
+    """Extract likely Armenian person names with stricter heuristics.
+
+    We prefer 2-3 title-cased Armenian tokens and reject headings/boilerplate.
+    """
+    normalized = re.sub(r'\s+', ' ', text)
+
+    # Example match: Բաբկէն Չուգասզեան or Գէորգ Դպիր Պալատացի
+    candidate_pattern = re.compile(
+        r'\b[Ա-Ֆ][ա-ֆև]{1,24}(?:-[Ա-Ֆա-ֆև]{1,24})?(?:\s+[Ա-Ֆ][ա-ֆև]{1,24}(?:-[Ա-Ֆա-ֆև]{1,24})?){1,2}\b'
+    )
+    candidates = [c.strip() for c in candidate_pattern.findall(normalized)]
+
+    filtered = []
+    for cand in candidates:
+        tokens = cand.split()
+        if len(tokens) < 2 or len(tokens) > 3:
+            continue
+        if len(cand) > 50:
+            continue
+        if any(sw in tokens for sw in NAME_STOPWORDS):
+            continue
+        filtered.append(cand)
+
+    return _unique_preserve_order(filtered)[:10]
 
 def detect_manuscript_refs(text: str) -> List[Dict]:
     """Detect Matenadaran and foreign manuscript references."""
@@ -37,11 +74,23 @@ def detect_manuscript_refs(text: str) -> List[Dict]:
         })
     # Foreign ms refs
     for match in re.finditer(FOREIGN_MS_PATTERN, text):
+        cleaned = re.sub(r'\s+', ' ', match.group(0)).strip(' ,.;:\n\t')
+        if not cleaned:
+            continue
         refs.append({
             'type': 'manuscript_foreign',
-            'text': match.group(0)
+            'text': cleaned
         })
-    return refs
+
+    deduped = []
+    seen = set()
+    for ref in refs:
+        key = (ref.get('type'), ref.get('shelfmark') or '', ref.get('text') or '')
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(ref)
+    return deduped
 
 def enrich_tei_with_standoff(tei_file: str, out_file: str):
     """Add standOff register for entities and manuscripts to TEI."""

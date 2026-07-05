@@ -123,7 +123,7 @@
       },
       "value": {
         "en": [
-          "2026-07-05T12:31:02Z by iiif/create_manifest.py"
+          "2026-07-05T13:58:06Z by iiif/create_manifest.py"
         ]
       }
     }
@@ -135,6 +135,18 @@
       "label": {
         "en": [
           "Matenadaran (source of miniatures) -- pending clearance"
+        ]
+      }
+    }
+  ],
+  "seeAlso": [
+    {
+      "id": "https://REPLACE-ME.example.org/tei/standoff_plates_manuscripts.xml",
+      "type": "Dataset",
+      "format": "application/tei+xml",
+      "label": {
+        "en": [
+          "Matenadaran manuscript register (TEI standoff)"
         ]
       }
     }
@@ -1426,6 +1438,19 @@
             }
           ]
         }
+      ],
+      "seeAlso": [
+        {
+          "id": "https://REPLACE-ME.example.org/tei/standoff_plates_manuscripts.xml#ms_matenadaran_10525",
+          "type": "Dataset",
+          "format": "application/tei+xml",
+          "label": {
+            "en": [
+              "TEI msDesc entry (ms_matenadaran_10525)"
+            ]
+          },
+          "profile": "https://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng"
+        }
       ]
     },
     {
@@ -1517,6 +1542,19 @@
               "target": "https://REPLACE-ME.example.org/iiif/canvas/plate_15"
             }
           ]
+        }
+      ],
+      "seeAlso": [
+        {
+          "id": "https://REPLACE-ME.example.org/tei/standoff_plates_manuscripts.xml#ms_matenadaran_1913",
+          "type": "Dataset",
+          "format": "application/tei+xml",
+          "label": {
+            "en": [
+              "TEI msDesc entry (ms_matenadaran_1913)"
+            ]
+          },
+          "profile": "https://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng"
         }
       ]
     },
@@ -1610,6 +1648,19 @@
             }
           ]
         }
+      ],
+      "seeAlso": [
+        {
+          "id": "https://REPLACE-ME.example.org/tei/standoff_plates_manuscripts.xml#ms_matenadaran_10521",
+          "type": "Dataset",
+          "format": "application/tei+xml",
+          "label": {
+            "en": [
+              "TEI msDesc entry (ms_matenadaran_10521)"
+            ]
+          },
+          "profile": "https://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng"
+        }
       ]
     },
     {
@@ -1701,6 +1752,19 @@
               "target": "https://REPLACE-ME.example.org/iiif/canvas/plate_17"
             }
           ]
+        }
+      ],
+      "seeAlso": [
+        {
+          "id": "https://REPLACE-ME.example.org/tei/standoff_plates_manuscripts.xml#ms_matenadaran_10522",
+          "type": "Dataset",
+          "format": "application/tei+xml",
+          "label": {
+            "en": [
+              "TEI msDesc entry (ms_matenadaran_10522)"
+            ]
+          },
+          "profile": "https://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng"
         }
       ]
     },
@@ -1794,6 +1858,19 @@
             }
           ]
         }
+      ],
+      "seeAlso": [
+        {
+          "id": "https://REPLACE-ME.example.org/tei/standoff_plates_manuscripts.xml#ms_matenadaran_10520",
+          "type": "Dataset",
+          "format": "application/tei+xml",
+          "label": {
+            "en": [
+              "TEI msDesc entry (ms_matenadaran_10520)"
+            ]
+          },
+          "profile": "https://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng"
+        }
       ]
     },
     {
@@ -1885,6 +1962,19 @@
               "target": "https://REPLACE-ME.example.org/iiif/canvas/plate_19"
             }
           ]
+        }
+      ],
+      "seeAlso": [
+        {
+          "id": "https://REPLACE-ME.example.org/tei/standoff_plates_manuscripts.xml#ms_matenadaran_10519",
+          "type": "Dataset",
+          "format": "application/tei+xml",
+          "label": {
+            "en": [
+              "TEI msDesc entry (ms_matenadaran_10519)"
+            ]
+          },
+          "profile": "https://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng"
         }
       ]
     },
@@ -1978,6 +2068,19 @@
             }
           ]
         }
+      ],
+      "seeAlso": [
+        {
+          "id": "https://REPLACE-ME.example.org/tei/standoff_plates_manuscripts.xml#ms_matenadaran_10838",
+          "type": "Dataset",
+          "format": "application/tei+xml",
+          "label": {
+            "en": [
+              "TEI msDesc entry (ms_matenadaran_10838)"
+            ]
+          },
+          "profile": "https://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng"
+        }
       ]
     },
     {
@@ -2069,6 +2172,19 @@
               "target": "https://REPLACE-ME.example.org/iiif/canvas/plate_21"
             }
           ]
+        }
+      ],
+      "seeAlso": [
+        {
+          "id": "https://REPLACE-ME.example.org/tei/standoff_plates_manuscripts.xml#ms_matenadaran_10908",
+          "type": "Dataset",
+          "format": "application/tei+xml",
+          "label": {
+            "en": [
+              "TEI msDesc entry (ms_matenadaran_10908)"
+            ]
+          },
+          "profile": "https://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng"
         }
       ]
     },
@@ -2162,6 +2278,19 @@
             }
           ]
         }
+      ],
+      "seeAlso": [
+        {
+          "id": "https://REPLACE-ME.example.org/tei/standoff_plates_manuscripts.xml#ms_matenadaran_10382",
+          "type": "Dataset",
+          "format": "application/tei+xml",
+          "label": {
+            "en": [
+              "TEI msDesc entry (ms_matenadaran_10382)"
+            ]
+          },
+          "profile": "https://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng"
+        }
       ]
     },
     {
@@ -2253,6 +2382,19 @@
               "target": "https://REPLACE-ME.example.org/iiif/canvas/plate_23"
             }
           ]
+        }
+      ],
+      "seeAlso": [
+        {
+          "id": "https://REPLACE-ME.example.org/tei/standoff_plates_manuscripts.xml#ms_matenadaran_10411",
+          "type": "Dataset",
+          "format": "application/tei+xml",
+          "label": {
+            "en": [
+              "TEI msDesc entry (ms_matenadaran_10411)"
+            ]
+          },
+          "profile": "https://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng"
         }
       ]
     }

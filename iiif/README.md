@@ -5,6 +5,13 @@ Static IIIF v3 delivery of the 23-page plates insert (pp. 549-571 of
 2022/2023). Includes 14 photographic portraits (folios I-XIV) and 9
 Matenadaran miniatures (folios XIV-XXIII).
 
+> **CLAUDE.md counts "24 pp." for the plates insert; the PDF has 23
+> numbered plate pages in that range.** Inspection of pp. 540-573 (see
+> commit history) shows pp. 547-548 are a section-title + blank verso
+> preceding the insert, likely counted in the printed pagination. The
+> IIIF pipeline treats 23 as authoritative; confirm with editors before
+> print reproduction.
+
 The output is a **Presentation API 3.0** Manifest plus one **Image API 3.0**
 level-0 static tile hierarchy per plate. Everything is precomputed; a
 plain static file server (nginx, S3, GitHub Pages, etc.) can host it.

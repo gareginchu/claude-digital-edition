@@ -18,6 +18,14 @@ import argparse
 from pathlib import Path
 from flask import Flask, request, jsonify
 
+# Load .env at import time so ANTHROPIC_API_KEY (and any Chroma/BGE knobs)
+# reach the anthropic SDK before the first client instantiation.
+try:
+    from dotenv import load_dotenv
+    load_dotenv(Path(__file__).parent.parent / '.env')
+except ImportError:
+    pass
+
 try:
     import anthropic
 except ImportError:

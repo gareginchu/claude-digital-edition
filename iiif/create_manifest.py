@@ -43,6 +43,23 @@ DEFAULT_OUT = REPO_ROOT / "iiif" / "manifests"
 
 DEFAULT_BASE = os.environ.get("PUBLIC_BASE", "https://REPLACE-ME.example.org/iiif")
 MANIFEST_BASE = os.environ.get("MANIFEST_BASE", "https://REPLACE-ME.example.org/manifests")
+TEI_BASE = os.environ.get("TEI_BASE", "https://REPLACE-ME.example.org/tei")
+
+# Miniature plates (folios XIV-XXIII) map to Matenadaran shelfmarks documented
+# in tei/standoff_plates_manuscripts.xml. Each entry is (plate_no -> xml:id).
+# Portraits (plates 1-13) have no manuscript register entry.
+PLATE_TO_MSDESC: dict[int, str] = {
+    14: "ms_matenadaran_10525",
+    15: "ms_matenadaran_1913",
+    16: "ms_matenadaran_10521",
+    17: "ms_matenadaran_10522",
+    18: "ms_matenadaran_10520",
+    19: "ms_matenadaran_10519",
+    20: "ms_matenadaran_10838",
+    21: "ms_matenadaran_10908",
+    22: "ms_matenadaran_10382",
+    23: "ms_matenadaran_10411",
+}
 
 
 def load_captions(pages_dir: Path) -> list[dict]:
@@ -99,6 +116,20 @@ def build_manifest(
 
         caption = c.get("caption") or ""
 
+        # For miniature plates, add a seeAlso link to the corpus manuscript
+        # register so a viewer / citation tool can jump from a Canvas to the
+        # scholarly TEI msDesc entry.
+        see_also_entries: list[dict] = []
+        ms_xml_id = PLATE_TO_MSDESC.get(c["plate_no"])
+        if ms_xml_id:
+            see_also_entries.append({
+                "id": f"{TEI_BASE.rstrip('/')}/standoff_plates_manuscripts.xml#{ms_xml_id}",
+                "type": "Dataset",
+                "format": "application/tei+xml",
+                "label": {"en": [f"TEI msDesc entry ({ms_xml_id})"]},
+                "profile": "https://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng",
+            })
+
         canvas = {
             "id": canvas_id,
             "type": "Canvas",
@@ -149,6 +180,8 @@ def build_manifest(
                 }],
             }],
         }
+        if see_also_entries:
+            canvas["seeAlso"] = see_also_entries
         canvases.append(canvas)
 
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -209,6 +242,14 @@ def build_manifest(
             "id": "https://www.matenadaran.am",
             "type": "Agent",
             "label": {"en": ["Matenadaran (source of miniatures) -- pending clearance"]},
+        }],
+        # Manifest-level seeAlso points at the TEI standoff register that
+        # documents every Matenadaran shelfmark reproduced in the insert.
+        "seeAlso": [{
+            "id": f"{TEI_BASE.rstrip('/')}/standoff_plates_manuscripts.xml",
+            "type": "Dataset",
+            "format": "application/tei+xml",
+            "label": {"en": ["Matenadaran manuscript register (TEI standoff)"]},
         }],
         "items": canvases,
     }

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="hy">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>Corpus manuscript register: Matenadaran holdings depicted in Volume I plates insert</title>
+      </titleStmt>
+      <publicationStmt>
+        <p>Standoff register accompanying the Chookaszian Vol. I digital edition. Compiled from the printed plates insert (pp. 549-571). Cross-referenceable by xml:id from article standoff blocks and the IIIF plates viewer.</p>
+      </publicationStmt>
+      <sourceDesc>
+        <p>Extracted from plate captions in Babken_Chookaszian_Vol_I (2).pdf via iiif/extract_plates.py; manually structured into TEI msDesc entries.</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <div>
+        <head>Manuscript register</head>
+        <p>Every miniature reproduced in the Volume I plates insert (folios XIV-XXIII) is a Matenadaran holding. This register makes each shelfmark citable from the article corpus and from the IIIF viewer via xml:id.</p>
+      </div>
+    </body>
+  </text>
+  <standOff>
+    <listBibl type="manuscript-refs">
+      <msDesc xml:id="ms_matenadaran_10525">
+        <msIdentifier>
+          <settlement>Երեւան</settlement>
+          <repository>Մ․ Մաշտոցի անվ․ Մատենադարան</repository>
+          <idno type="shelfmark">ձեռ․ 10525</idno>
+        </msIdentifier>
+        <msContents>
+          <summary>Աւետարան, 1306թ․ — «Ղազարոսի յարութիւնը», թերթ 154ա</summary>
+        </msContents>
+        <additional>
+          <adminInfo>
+            <note>Ջորջ Մարտիկեանի նւերը։ Reproduced in Vol. I plates insert, folio XIV (PDF p. 562).</note>
+          </adminInfo>
+        </additional>
+      </msDesc>
+      <msDesc xml:id="ms_matenadaran_1913">
+        <msIdentifier>
+          <settlement>Երեւան</settlement>
+          <repository>Մ․ Մաշտոցի անվ․ Մատենադարան</repository>
+          <idno type="shelfmark">ձեռ․ 1913</idno>
+        </msIdentifier>
+        <msContents>
+          <summary>«Մկրտութիւն» (հատւած)</summary>
+        </msContents>
+        <additional>
+          <adminInfo>
+            <note>Ժիւլիէն Յովսէփեանի նւերը։ Reproduced in Vol. I plates insert, folio XV (PDF p. 563).</note>
+          </adminInfo>
+        </additional>
+      </msDesc>
+      <msDesc xml:id="ms_matenadaran_10521">
+        <msIdentifier>
+          <settlement>Երեւան</settlement>
+          <repository>Մ․ Մաշտոցի անվ․ Մատենադարան</repository>
+          <idno type="shelfmark">ձեռ․ 10521</idno>
+        </msIdentifier>
+        <msContents>
+          <summary>Աւետարան, 1462թ․ — «Դժոխքի աւերումը», թերթ 7բ</summary>
+        </msContents>
+        <additional>
+          <adminInfo>
+            <note>Արշակ Տիգրանեանի նւերը։ Reproduced in Vol. I plates insert, folio XVI (PDF p. 564).</note>
+          </adminInfo>
+        </additional>
+      </msDesc>
+      <msDesc xml:id="ms_matenadaran_10522">
+        <msIdentifier>
+          <settlement>Երեւան</settlement>
+          <repository>Մ․ Մաշտոցի անվ․ Մատենադարան</repository>
+          <idno type="shelfmark">ձեռ․ 10522</idno>
+        </msIdentifier>
+        <msContents>
+          <summary>Աւետարան, 15-րդ դար — «Սբ․ Սարգիս եւ Սբ․ Թեոդորոս», թերթ 11բ</summary>
+        </msContents>
+        <additional>
+          <adminInfo>
+            <note>Ալիս Գաւուքչեանի նւերը։ Reproduced in Vol. I plates insert, folio XVII (PDF p. 565).</note>
+          </adminInfo>
+        </additional>
+      </msDesc>
+      <msDesc xml:id="ms_matenadaran_10520">
+        <msIdentifier>
+          <settlement>Երեւան</settlement>
+          <repository>Մ․ Մաշտոցի անվ․ Մատենադարան</repository>
+          <idno type="shelfmark">ձեռ․ 10520</idno>
+        </msIdentifier>
+        <msContents>
+          <summary>Խիզանի Աւետարան, 1608թ․ — «Ղազարոսի յարութիւնը», թերթ 10ա</summary>
+        </msContents>
+        <additional>
+          <adminInfo>
+            <note>Տիգրան Տեյիրմենճեանի նւերը։ Reproduced in Vol. I plates insert, folio XVIII (PDF p. 566).</note>
+          </adminInfo>
+        </additional>
+      </msDesc>
+      <msDesc xml:id="ms_matenadaran_10519">
+        <msIdentifier>
+          <settlement>Երեւան</settlement>
+          <repository>Մ․ Մաշտոցի անվ․ Մատենադարան</repository>
+          <idno type="shelfmark">ձեռ․ 10519</idno>
+        </msIdentifier>
+        <msContents>
+          <summary>Մաշտոց, 1504թ․</summary>
+        </msContents>
+        <additional>
+          <adminInfo>
+            <note>Իսպիրեանների նւերը։ Reproduced in Vol. I plates insert, folio XIX (PDF p. 567).</note>
+          </adminInfo>
+        </additional>
+      </msDesc>
+      <msDesc xml:id="ms_matenadaran_10838">
+        <msIdentifier>
+          <settlement>Երեւան</settlement>
+          <repository>Մ․ Մաշտոցի անվ․ Մատենադարան</repository>
+          <idno type="shelfmark">ձեռ․ 10838</idno>
+        </msIdentifier>
+        <msContents>
+          <summary>Գրիգոր Նարեկացի, «Մատեան ողբերգութեան», 1761թ․ — Սայաթ-Նովայի ձեռագրի յիշատակարան, թերթ 328ա</summary>
+        </msContents>
+        <additional>
+          <adminInfo>
+            <note>Reproduced in Vol. I plates insert, folio XX (PDF p. 568).</note>
+          </adminInfo>
+        </additional>
+      </msDesc>
+      <msDesc xml:id="ms_matenadaran_10908">
+        <msIdentifier>
+          <settlement>Երեւան</settlement>
+          <repository>Մ․ Մաշտոցի անվ․ Մատենադարան</repository>
+          <idno type="shelfmark">ձեռ․ 10908</idno>
+        </msIdentifier>
+        <msContents>
+          <summary>Օխուի Աւետարան, 16-17-րդ դդ․ — «Հոգեգալուստ», թերթ 67ա</summary>
+        </msContents>
+        <additional>
+          <adminInfo>
+            <note>Reproduced in Vol. I plates insert, folio XXI (PDF p. 569).</note>
+          </adminInfo>
+        </additional>
+      </msDesc>
+      <msDesc xml:id="ms_matenadaran_10382">
+        <msIdentifier>
+          <settlement>Երեւան</settlement>
+          <repository>Մ․ Մաշտոցի անվ․ Մատենադարան</repository>
+          <idno type="shelfmark">ձեռ․ 10382</idno>
+        </msIdentifier>
+        <msContents>
+          <summary>Ռաֆայէլ Մարկոսեանի Աւետարան — «Հայկական այբուբենի ստեղծումը», արծաթէ կազմ</summary>
+        </msContents>
+        <additional>
+          <adminInfo>
+            <note>Reproduced in Vol. I plates insert, folio XXII (PDF p. 570).</note>
+          </adminInfo>
+        </additional>
+      </msDesc>
+      <msDesc xml:id="ms_matenadaran_10411">
+        <msIdentifier>
+          <settlement>Երեւան</settlement>
+          <repository>Մ․ Մաշտոցի անվ․ Մատենադարան</repository>
+          <idno type="shelfmark">ձեռ․ 10411</idno>
+        </msIdentifier>
+        <msContents>
+          <summary>Սաղմոսարան, 1636թ․ — «Դաւիթը տաւիղ նւագելիս», 1704թ․ Կեսարիայի արծաթէ կազմ</summary>
+        </msContents>
+        <additional>
+          <adminInfo>
+            <note>Արծաթագործ Մահտեսի Մալխաս Կարապետ։ Reproduced in Vol. I plates insert, folio XXIII (PDF p. 571).</note>
+          </adminInfo>
+        </additional>
+      </msDesc>
+    </listBibl>
+  </standOff>
+</TEI>

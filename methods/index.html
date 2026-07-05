@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Digital scholarly edition of Babken Chookaszian, Collected Works Volume I."><title>AI methods statement — Chookaszian Digital Edition</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Armenian:wght@400;600;700&family=Noto+Sans+Armenian:wght@400;500;600&display=swap"><meta property="og:title" content="AI methods statement — Chookaszian Digital Edition"><meta property="og:type" content="website"><meta property="og:description" content="Digital scholarly edition of Babken Chookaszian, Collected Works Volume I."><link rel="stylesheet" href="/claude-digital-edition/_astro/about.BHScvxHF.css"></head> <body> <a href="#main" class="skip-link">Skip to content</a> <div class="rights-ribbon" role="note">
+Pre-launch preview. Article text © Levon and Garegin Chugaszyan (in-copyright in Armenia until 2067). Plates require per-image clearance before publication.
+</div> <header class="site-header"> <div class="site-header-inner"> <a class="site-brand" href="/claude-digital-edition/">
+Բ. Չուգասզեան <em>·</em> <span style="font-family: var(--font-sans); font-weight: 500; font-size: .95rem;">Երկերի ժողովածու Ա</span> </a> <nav class="site-nav" aria-label="Primary"> <a href="/claude-digital-edition/" lang="en"> Home </a><a href="/claude-digital-edition/#articles" lang="en"> Articles </a><a href="/claude-digital-edition/plates" lang="en"> Plates </a><a href="/claude-digital-edition/methods" aria-current="page" lang="en"> AI methods </a><a href="/claude-digital-edition/about" lang="en"> About </a> </nav> </div> </header> <main id="main">  <h1 style="font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.15; margin: 0 0 var(--space-4);">AI methods statement</h1> <p style="max-width: var(--measure); font-family: var(--font-sans); color: var(--ink-soft);">
+Which parts of this edition are machine-generated, which are human-reviewed, and where
+    the pipelines can go wrong. Version 2026-07-05.
+</p> <article class="article"> <h2 style="margin-top: var(--space-6);">1. Text extraction</h2> <p>
+The source PDF (<em>Babken Chookaszian, Collected Works Vol. I</em>, Yerevan 2022/2023,
+      2nd expanded edition) carries a full text layer. We extract it with
+<code>pdfminer.six</code> and do <strong>not</strong> re-OCR any page. Form-feed characters
+      preserved by pdfminer become <code>&lt;pb n="P"/&gt;</code> milestones at every printed-page
+      boundary. Any LLM-vs-extraction conflict resolves in favour of the extraction unless a
+      human editor overrules it.
+</p> <h2>2. TEI encoding + validation</h2> <p>
+Every article is TEI P5 4.11.0. Both layers of validation run on every push:
+</p> <ul> <li><strong>RelaxNG</strong> against <code>tei_all.rng</code> from tei-c.org — base structural conformance.</li> <li><strong>ISO Schematron</strong> against <code>odd/chookaszian.sch</code> — project-specific rules: teiHeader completeness, <code>xml:id</code> on standoff persons and manuscripts, <code>@n</code> required on every <code>&lt;pb/&gt;</code>, <code>@xml:lang</code> and <code>@type</code> allow-list warnings.</li> </ul> <p>
+CI blocks merge on any RelaxNG or Schematron error. Warnings are visible but do not
+      block, so we can tighten the vocabulary iteratively.
+</p> <h2>3. Entity enrichment (persons + manuscripts)</h2> <p> <code>pipeline/enrich_tei.py</code> extracts likely person names and manuscript shelfmarks
+      with a rule-based heuristic: NFC-normalised Armenian regex candidates, a curated
+      stopword list, inflectional deduplication, and title/genitive filters. Output goes into
+      the standoff register.
+</p> <p> <strong>Every extracted entity is auto-generated and marked as such.</strong> Person and
+      manuscript entries carry a <code>resp="auto"</code> attribute; the article-page entity
+      panel renders a chip that reads <em>auto (unreviewed)</em>. Do not cite an auto-only
+      entity as gospel — spot-check against the article text (link to the manuscript catalogue
+      is provided where a Wikidata/Matenadaran identifier exists).
+</p> <p>
+QA reports for the 001–055 range live at <a href="https://github.com/gareginchu/claude-digital-edition/tree/main/eval">eval/</a>.
+      Known limits: 28 of 55 articles yield zero persons (lexicon-style entries); article 054
+      dropped 2 bibliographic-title false positives after the Vol. I second-pass tightening.
+</p> <h2>4. Retrieval and citation ("Ask the corpus")</h2> <p>
+The retrieval index is intentionally hybrid:
+</p> <ul> <li><strong>BM25</strong> over lemmatised chunks with a transliteration table (Armenian → Latin for cross-language surface matching)</li> <li><strong>BGE-M3 dense embeddings</strong> stored in ChromaDB (multilingual, closes the gap on English queries against the Armenian corpus)</li> <li>Fused with <strong>Reciprocal Rank Fusion</strong> (k=60)</li> </ul> <p>
+Answer generation uses Anthropic's Citations API. Every text block in the response
+      must carry at least one citation to a retrieved chunk; if any span is uncited the
+      verification gate marks the answer <em>unverified</em>, and strict-mode callers get an
+      abstention instead of the answer.
+</p> <p>
+Abstention is <em>visible</em>. When the retrieval score is below threshold or when
+      the verification gate rejects, the response is literally: <em>“The corpus does not
+      contain sufficiently relevant information to answer this question reliably.”</em>
+There is no fallback to model-only knowledge.
+</p> <p>
+Retrieval eval sets and citation-accuracy measurements are published in
+<a href="https://github.com/gareginchu/claude-digital-edition/tree/main/rag/eval">rag/eval/</a>.
+</p> <h2>5. IIIF plates and manuscript register</h2> <p>
+The plates insert (23 pages, pp. 549–571) is delivered as static IIIF Image API 3.0
+      tiles with a Presentation 3.0 manifest. Ten miniatures are Matenadaran holdings; each
+      has a <code>&lt;msDesc&gt;</code> with <code>xml:id</code> in a corpus-level register
+      (<code>tei/standoff_plates_manuscripts.xml</code>), and the manifest carries per-canvas
+<code>seeAlso</code> links pointing at that TEI entry. IIIF Content State URLs are the
+      canonical citation format for a specific plate region.
+</p> <p>
+Plate tiles are <strong>not published</strong> until the Matenadaran per-image clearance
+      and the heirs' licence are signed. The manifest ships with <code>rights: InC-RUW</code>
+and a metadata field <em>Public visibility: pending rights clearance</em>.
+</p> <h2>6. What we do NOT do</h2> <ul> <li>We do <strong>not</strong> normalise classical (Mesropian) to reformed orthography, or vice versa. Both are preserved as printed.</li> <li>We do <strong>not</strong> present a "Chookaszian persona" chatbot. The retrieval endpoint answers with citations to his articles; it does not impersonate him.</li> <li>We do <strong>not</strong> generate free abstractive summaries. If a summary appears on a page, it is either printed source material or a labelled human editorial note.</li> <li>We do <strong>not</strong> ship translations without a two-tier label. "AI draft, unrevised" and "reviewed by [scholar]" are never blended. Currently no translations are published.</li> </ul> <h2>7. Provenance and version</h2> <p>
+Every artefact is regenerated from source by CI on every push
+      (<a href="https://github.com/gareginchu/claude-digital-edition/actions">workflows</a>).
+      The corpus manifest lives at
+<a href="https://github.com/gareginchu/claude-digital-edition/blob/main/tei/corpus_manifest.json">tei/corpus_manifest.json</a>
+and records the extractor version, enrichment scope, and known open tickets. Each
+      article file preserves its <code>&lt;publicationStmt&gt;</code> and
+<code>&lt;sourceDesc&gt;</code>.
+</p> <p style="font-family: var(--font-sans); font-size: .875rem; color: var(--ink-mute); margin-top: var(--space-6);">
+Questions or corrections: open an issue at
+<a href="https://github.com/gareginchu/claude-digital-edition/issues">github.com/gareginchu/claude-digital-edition/issues</a>.
+</p> </article>  </main> <footer class="site-footer"> <div class="site-footer-inner"> <div> <h4>Volume</h4> <p style="margin:0;">Babken Chookaszian, <em>Collected Works Volume I</em> — Yerevan 2022/2023 (2nd expanded edition). 573 pp., 55 articles, 23-page plates insert.</p> </div> <div> <h4>Rights</h4> <ul> <li>Article text: © Levon and Garegin Chugaszyan</li> <li>Plates: pending Matenadaran clearance</li> <li>New metadata + code: CC BY 4.0</li> </ul> </div> <div> <h4>Infrastructure</h4> <ul> <li>TEI P5 (validated: RelaxNG + Schematron)</li> <li>IIIF v3 (Presentation 3, Image 3)</li> <li>RAG: BM25 + BGE-M3 hybrid, Claude Citations API</li> <li><a href="https://github.com/gareginchu/claude-digital-edition">Source on GitHub</a></li> </ul> </div> </div> </footer> </body></html>

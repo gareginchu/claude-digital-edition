@@ -1,4 +1,167 @@
-<!-- ODD placeholder for Chookaszian TEI ODD (jTEI-derived) -->
-<odd>
-  <!-- Compose ODD per project conventions. -->
-</odd>
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<!--
+  chookaszian.odd
+  ================================================================
+  Project-specific ODD customization for the digital edition of
+  Babken Chookaszian, Erker'i zhoghovatsu (Collected Works).
+
+  This ODD is a DOCUMENTATION ARTIFACT describing customizations
+  layered on top of TEI P5 (>=4.11). It follows jTEI conventions:
+  <schemaSpec source="tei_all"> + <moduleRef>/<elementSpec>/<attSpec>.
+
+  Runtime validation happens in two layers, wired into
+  pipeline/validate_tei.py:
+
+    1. RelaxNG: TEI-C's tei_all.rng (odd/schemas/tei_all.rng),
+       fetched on demand. Catches TEI structural violations.
+    2. ISO Schematron: odd/chookaszian.sch, applied via
+       lxml.isoschematron. Catches project-specific constraints
+       that RNG cannot express (controlled vocabularies for
+       xml:lang / @type, required teiHeader children, xml:id
+       requirement on standOff <person>/<msDesc>, and future
+       @n-on-<pb> once page breaks are encoded).
+
+  We deliberately do NOT generate RNG from this ODD. Requiring
+  Roma/Saxon/Docker in CI is out of scope on Windows contributor
+  machines. The ODD documents intent; the SCH file enforces it.
+
+  Related: CLAUDE.md sections "Architecture" and "Pipeline phases".
+-->
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>Chookaszian Collected Works: TEI ODD customization</title>
+        <author>BC Project</author>
+      </titleStmt>
+      <publicationStmt>
+        <p>Metadata and apparatus: CC BY 4.0. Source texts remain in
+           copyright until 2067-12-31 per Armenian law (life+70).</p>
+      </publicationStmt>
+      <sourceDesc>
+        <p>Derived from jTEI ODD conventions; targets TEI P5 4.11+.</p>
+      </sourceDesc>
+    </fileDesc>
+    <encodingDesc>
+      <projectDesc>
+        <p>Digital scholarly edition of Babken Chookaszian's Collected
+           Works (Yerevan 2022/2023). Extraction from PDF text layer;
+           per-article TEI files; standOff registers for persons, places,
+           works and manuscripts; static-first publication.</p>
+      </projectDesc>
+    </encodingDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <div type="customization">
+        <head>Schema specification</head>
+        <schemaSpec ident="chookaszian" start="TEI teiCorpus" source="tei_all.rng">
+          <!-- Modules kept from tei_all. Restricted to those the corpus
+               actually uses today; extend when new phenomena appear. -->
+          <moduleRef key="core"/>
+          <moduleRef key="header"/>
+          <moduleRef key="tei"/>
+          <moduleRef key="textstructure"/>
+          <moduleRef key="linking"/>
+          <moduleRef key="namesdates"/>
+          <moduleRef key="msdescription"/>
+          <moduleRef key="transcr"/>
+
+          <!--
+            xml:lang controlled vocabulary
+            ------------------------------
+            Enforced by Schematron rule "lang-vocab" (warning, not error,
+            during Phase 2 iteration). Values allowed on any element:
+
+              hy                   - Reformed Eastern Armenian
+              hy-arevela-classic   - Classical (Mesropian) orthography,
+                                     Eastern Armenian phonology (project
+                                     convention pending IETF registration)
+              xcl                  - Grabar / Classical Armenian
+              xcl-Latn             - Romanized Grabar with diacritics
+                                     (per CLAUDE.md)
+              ru                   - Russian
+              fr                   - French
+              en                   - English
+
+            Any other value emits a WARNING (not a hard failure) so the
+            corpus can iterate. Never normalize orthography; preserve
+            exactly as printed (CLAUDE.md).
+          -->
+          <elementSpec ident="TEI" mode="change">
+            <desc>Root TEI element; xml:lang required (Schematron
+                  rule "lang-vocab" restricts allowed values).</desc>
+          </elementSpec>
+
+          <!--
+            teiHeader completeness
+            ----------------------
+            Enforced by Schematron rule "header-completeness".
+            Every article's teiHeader/fileDesc must carry non-empty
+            titleStmt/title, publicationStmt, and sourceDesc. This is a
+            Phase-1 acceptance criterion (title recovered from ToC;
+            publication + source recording extraction provenance).
+          -->
+          <elementSpec ident="teiHeader" mode="change">
+            <desc>Every teiHeader must contain a non-empty
+                  titleStmt/title, publicationStmt, and sourceDesc.</desc>
+          </elementSpec>
+
+          <!--
+            standOff / xml:id requirement
+            -----------------------------
+            Enforced by Schematron rule "standoff-xmlid".
+            Every person and msDesc inside standOff must carry
+            @xml:id so downstream RAG chunker + entity panel can
+            reference them stably. Phase-3 enrichment writes these.
+          -->
+          <elementSpec ident="standOff" mode="change">
+            <desc>standOff registers must give xml:id to every
+                  person and msDesc child.</desc>
+          </elementSpec>
+
+          <!--
+            Project @type vocabulary
+            ------------------------
+            Enforced by Schematron rule "type-vocab" (warning).
+            Discovered @type values in the current corpus:
+
+              source_pages     - on note: original PDF page span
+                                 covered by the article (e.g. "3-4").
+                                 Phase-1 provenance from split_articles.
+              manuscript-refs  - on listBibl: wraps msDesc shelfmark
+                                 registers extracted by enrichment.
+
+            Any other @type value emits a WARNING so unknown types can
+            be reviewed and added to the whitelist deliberately.
+          -->
+          <valList type="closed" mode="add">
+            <valItem ident="source_pages">
+              <desc>PDF page span; on note[@type='source_pages'].</desc>
+            </valItem>
+            <valItem ident="manuscript-refs">
+              <desc>Wraps msDesc register in standOff.</desc>
+            </valItem>
+          </valList>
+
+          <!--
+            pb discipline (Phase-2 target)
+            ------------------------------
+            Enforced by Schematron rule "pb-has-n". If any pb element
+            exists it MUST carry @n (page number). No pb elements
+            exist in the corpus yet: they are a Phase-2 encoding gap
+            (see CLAUDE.md "Phase 2 - TEI encoding"). The rule is
+            defensive: it fires only if page breaks are added later.
+          -->
+          <elementSpec ident="pb" mode="change">
+            <desc>Original pagination anchor. When present, @n is
+                  required (CLAUDE.md Phase 2 acceptance criterion).
+                  Not yet emitted by the extraction pipeline.</desc>
+          </elementSpec>
+
+        </schemaSpec>
+      </div>
+    </body>
+  </text>
+</TEI>

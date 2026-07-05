@@ -43,29 +43,48 @@ def _sparql_query(sparql: str) -> Optional[dict]:
         return None
 
 
+def _canonical_forms(name: str) -> List[str]:
+    """Generate candidate canonical (nominative) forms from an inflected Armenian name.
+
+    Wikidata stores nominative Armenian names. Our extractor produces genitive/dative
+    inflections. We strip common suffixes and return a priority list to try.
+    """
+    name = name.strip()
+    candidates = [name]
+    # Strip common Armenian inflectional suffixes (longest first)
+    suffixes = ['ինը', 'ցուն', 'ցու', 'անը', 'անի', 'ային', 'այի', 'ուն', 'ու', 'ին', 'ը', 'ն', 'ի']
+    for sfx in suffixes:
+        if name.endswith(sfx) and len(name) - len(sfx) >= 4:
+            stem = name[:-len(sfx)]
+            candidates.append(stem)
+            break
+    # Also try last-token only (family name)
+    tokens = name.split()
+    if len(tokens) > 1:
+        candidates.append(tokens[-1])
+        candidates.append(tokens[0])
+    return list(dict.fromkeys(candidates))  # deduplicated, order preserved
+
+
 def _lookup_armenian_person(name: str) -> Optional[str]:
     """Return a Wikidata QID string (e.g. 'Q12345') for a person name, or None."""
-    # Normalise for query
     name_nfc = unicodedata.normalize('NFC', name.strip())
-    # Strip common inflectional suffixes to improve match rate
-    stem = re.sub(r'[ի ու ը ն]$', '', name_nfc)
-
-    sparql = f"""
-SELECT ?item ?itemLabel WHERE {{
+    for candidate in _canonical_forms(name_nfc):
+        # Try Armenian label
+        sparql = f"""
+SELECT ?item WHERE {{
   ?item wdt:P31 wd:Q5 .
-  ?item rdfs:label "{name_nfc}"@hy .
-  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "hy,en". }}
+  ?item rdfs:label "{candidate}"@hy .
 }}
 LIMIT 2
 """
-    data = _sparql_query(sparql)
-    if data is None:
-        return None
-    results = data.get('results', {}).get('bindings', [])
-    if len(results) == 1:
-        uri = results[0]['item']['value']
-        qid = uri.rsplit('/', 1)[-1]
-        return qid
+        data = _sparql_query(sparql)
+        if data is None:
+            continue
+        results = data.get('results', {}).get('bindings', [])
+        if len(results) == 1:
+            uri = results[0]['item']['value']
+            return uri.rsplit('/', 1)[-1]
     return None
 
 

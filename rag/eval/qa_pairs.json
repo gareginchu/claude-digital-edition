@@ -1,0 +1,94 @@
+[
+  {
+    "id": "qa_001",
+    "question": "Who is the author of the article about the Armenian-Arabic-Persian dictionary?",
+    "expected_article": "article_010",
+    "expected_contains": "ԲԱՌARARAN",
+    "notes": "Lexicon-style article; tests recall on zero-entity articles"
+  },
+  {
+    "id": "qa_002",
+    "question": "Which articles mention Grigor Narekatsi?",
+    "expected_article": "article_037",
+    "notes": "High-frequency historical person spanning multiple articles"
+  },
+  {
+    "id": "qa_003",
+    "question": "What manuscript is referenced in connection with Gevorg Dpir?",
+    "expected_article": "article_008",
+    "expected_contains": "Bodleian",
+    "notes": "Tests manuscript reference retrieval"
+  },
+  {
+    "id": "qa_004",
+    "question": "Which scholar wrote about Movses Khorenatsi and Favstos Buzand?",
+    "expected_article": "article_017",
+    "notes": "Tests multi-entity co-occurrence retrieval"
+  },
+  {
+    "id": "qa_005",
+    "question": "What is discussed about Konstantin Erznkatsi's poetry?",
+    "expected_article": "article_022",
+    "notes": "Tests person-centric content retrieval"
+  },
+  {
+    "id": "qa_006",
+    "question": "Which articles cover the Mkhitar Sebastatsi and the Mekhitarist order?",
+    "expected_article": "article_047",
+    "notes": "Tests institutional/person co-reference"
+  },
+  {
+    "id": "qa_007",
+    "question": "What does the corpus say about Ibn Sina and Armenian medicine?",
+    "expected_article": "article_002",
+    "notes": "Tests cross-language name retrieval"
+  },
+  {
+    "id": "qa_008",
+    "question": "Describe the sources cited for Stepanos Taronatsi",
+    "expected_article": "article_020",
+    "notes": "Tests bibliographic/citation retrieval"
+  },
+  {
+    "id": "qa_009",
+    "question": "Who is Vahram Pahlavuni and what is his historical role?",
+    "expected_article": "article_030",
+    "notes": "Low-recall article — tests abstention behaviour"
+  },
+  {
+    "id": "qa_010",
+    "question": "What year was the Chookaszian volume published?",
+    "expected_article": null,
+    "notes": "Out-of-scope question — tests abstention (answer not in corpus)"
+  },
+  {
+    "id": "qa_011",
+    "question": "Which poet is associated with the Aghtamar monastery?",
+    "expected_article": "article_009",
+    "notes": "Tests place-person co-reference"
+  },
+  {
+    "id": "qa_012",
+    "question": "What is discussed in the article on Grigoris Aghtamartsi?",
+    "expected_article": "article_023",
+    "notes": "Direct person-article lookup"
+  },
+  {
+    "id": "qa_013",
+    "question": "Which articles discuss the Sasanian dynasty in Armenia?",
+    "expected_article": "article_016",
+    "notes": "Tests dynasty/period retrieval"
+  },
+  {
+    "id": "qa_014",
+    "question": "What manuscript sources are cited for the hymnal?",
+    "expected_article": "article_054",
+    "notes": "Tests manuscript ref in article_054 (Bodleian)"
+  },
+  {
+    "id": "qa_015",
+    "question": "What is the role of Sirarpi Ter-Nersessian in Armenian art history?",
+    "expected_article": "article_055",
+    "notes": "Tests modern scholar retrieval"
+  }
+]

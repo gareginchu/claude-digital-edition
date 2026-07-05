@@ -1,0 +1,45 @@
+name: Deploy site to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install deps
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Build artifacts (TEI → HTML → RAG → IIIF)
+      run: |
+        python pipeline/generate_tei_drafts.py pipeline/articles tei
+        python site/batch_render_tei.py tei site/html site/tei_to_html.py
+        python rag/create_rag_index.py tei rag/index.json
+        python iiif/create_manifest.py iiif/manifests
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    
+    - name: Build Astro site
+      run: |
+        cd site
+        npm install
+        npm run build
+    
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./site/dist

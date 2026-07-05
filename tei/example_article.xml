@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:lang="hy" xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>Example Article</title>
+      </titleStmt>
+      <publicationStmt>
+        <p>Unpublished sample</p>
+      </publicationStmt>
+      <sourceDesc>
+        <p>From Babken Chookaszian, sample.</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <div>
+        <head>Example</head>
+        <p xml:lang="hy">Sample paragraph in Armenian (placeholder).</p>
+      </div>
+    </body>
+  </text>
+</TEI>

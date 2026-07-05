@@ -1,0 +1,12 @@
+[project]
+name = "claude-digital-edition"
+version = "0.1.0"
+description = "Digital edition pipeline and tooling for Babken Chookaszian"
+readme = "README.md"
+requires-python = ">=3.10"
+
+[project.requirements]
+# Managed in requirements.txt
+
+[tool.pytest]
+addopts = "-q"

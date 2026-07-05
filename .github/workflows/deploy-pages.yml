@@ -19,9 +19,17 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+
+    - name: Rebuild corpus from PDF (ToC-aligned)
+      run: |
+        test -f "Babken_Chookaszian_Vol_I (2).pdf" || (echo "Source PDF missing" && exit 1)
+        rm -f pipeline/articles/article_*.txt
+        python -m pipeline.run_pipeline "Babken_Chookaszian_Vol_I (2).pdf"
     
     - name: Build artifacts (TEI → HTML → RAG → IIIF)
       run: |
+        rm -f tei/article_*.xml
+        rm -f site/html/article_*.html
         python pipeline/generate_tei_drafts.py pipeline/articles tei
         python site/batch_render_tei.py tei site/html site/tei_to_html.py
         python rag/create_rag_index.py tei rag/index.json

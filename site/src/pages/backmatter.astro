@@ -1,7 +1,13 @@
 ---
 import fs from 'node:fs';
+import path from 'node:path';
 
-const backmatterDir = new URL('../../../pipeline/backmatter', import.meta.url);
+const candidateDirs = [
+  path.join(process.cwd(), 'public', 'backmatter'),
+  path.join(process.cwd(), '..', 'pipeline', 'backmatter'),
+];
+
+const backmatterDir = candidateDirs.find((dir) => fs.existsSync(dir));
 
 function parseBackmatterFile(raw) {
   const lines = raw.split(/\r?\n/);
@@ -28,9 +34,12 @@ function parseBackmatterFile(raw) {
 
 let sections = [];
 try {
+  if (!backmatterDir) {
+    throw new Error('No backmatter directory found in expected locations.');
+  }
   const files = fs.readdirSync(backmatterDir).filter((f) => f.endsWith('.txt')).sort();
   sections = files.map((file) => {
-    const raw = fs.readFileSync(new URL(file, backmatterDir), 'utf-8');
+    const raw = fs.readFileSync(path.join(backmatterDir, file), 'utf-8');
     return { file, ...parseBackmatterFile(raw) };
   });
 } catch {

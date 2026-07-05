@@ -25,6 +25,8 @@ jobs:
         test -f "Babken_Chookaszian_Vol_I (2).pdf" || (echo "Source PDF missing" && exit 1)
         rm -f pipeline/articles/article_*.txt
         python -m pipeline.run_pipeline "Babken_Chookaszian_Vol_I (2).pdf"
+        rm -f pipeline/backmatter/backmatter_*.txt
+        python pipeline/split_back_matter.py pipeline/articles/article_056.txt pipeline/backmatter
     
     - name: Build artifacts (TEI → HTML → RAG → IIIF)
       run: |

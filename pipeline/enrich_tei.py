@@ -13,7 +13,7 @@ NS = {'tei': 'http://www.tei-c.org/ns/1.0'}
 
 # Manuscript reference patterns: Մատենադարան/Matenadaran shelfmark
 MATENADARAN_PATTERN = r'(?:Մատենադարան|Matenadaran)\s+(?:ձեռ\.|ms\.|MS\.)\s*(\d+)'
-FOREIGN_MS_PATTERN = r'(?:British Library|BL|Bodleian|Vatican|BNF|Ms\.|MS\.|fol\.|f\.)[\s\w\d\-\.]*'
+FOREIGN_MS_PATTERN = r'(?:British Library|BL|Bodleian(?: Library)?|Vatican|BNF)\b[\s\w\d\-\.,;:()/]*'
 
 NAME_STOPWORDS = {
     'ԲԱՌԱՐԱՆ',
@@ -46,7 +46,14 @@ NON_PERSON_TOKENS = {
     'Մանկավարժական',
     'ԼԵԶՎԱԲԱՆՈՒԹՅՈՒՆ',
     'Պատմության',
+    'Պատմութեան',
     'Բառգիրք',
+    'Մատենադարան',
+    'Մատենադարանին',
+    'Քաղաքաշինության',
+    'Քաղաքաշինութեան',
+    'Իրանի',
+    'Պարսկաստանում',
 }
 
 LANGUAGE_TERMS = {
@@ -96,6 +103,16 @@ TOPONYM_BIGRAMS = {
     'Երեւան Հայաստան',
 }
 
+GEO_ADJECTIVE_TOKENS = {
+    'Արևմտյան',
+    'Արեւմտյան',
+    'Արևելյան',
+    'Արեւելյան',
+    'Հյուսիսային',
+    'Հարավային',
+    'Կենտրոնական',
+}
+
 
 def _unique_preserve_order(items: List[str]) -> List[str]:
     seen = set()
@@ -117,6 +134,10 @@ def _is_non_person_candidate(candidate: str) -> bool:
     if tokens[-1] in NON_PERSON_SUFFIXES:
         return True
     if any(tok in NON_PERSON_TOKENS for tok in tokens):
+        return True
+    if any(tok.startswith('Մատենա') for tok in tokens):
+        return True
+    if any(tok in GEO_ADJECTIVE_TOKENS for tok in tokens):
         return True
     # Dictionary/meta terms often leak into NER candidates.
     if any(tok in LANGUAGE_TERMS for tok in tokens):

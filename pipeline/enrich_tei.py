@@ -35,6 +35,61 @@ NON_PERSON_SUFFIXES = {
     'Ինստիտուտի',
 }
 
+NON_PERSON_TOKENS = {
+    'Սուրբ',
+    'Հայկական',
+    'Արևելյան',
+    'Արեւելյան',
+    'Ըստ',
+    'Յաղագս',
+    'Ֆիզիկական',
+    'Մանկավարժական',
+    'ԼԵԶՎԱԲԱՆՈՒԹՅՈՒՆ',
+    'Պատմության',
+    'Բառգիրք',
+}
+
+LANGUAGE_TERMS = {
+    'Արաբերեն',
+    'Պարսկերեն',
+    'Հայերեն',
+    'Հայերէն',
+    'անգլերեն',
+    'ռուսերեն',
+    'ֆրանսերեն',
+}
+
+PERSON_SUFFIX_HINTS = (
+    'եան',
+    'յան',
+    'եանց',
+    'ենց',
+    'ացի',
+    'եցի',
+    'ունի',
+)
+
+KNOWN_GIVEN_NAMES = {
+    'Բաբկէն',
+    'Գուրգէն',
+    'Աննա',
+    'Հայկանուշ',
+    'Ռուզան',
+    'Վեներա',
+    'Մկրտիչ',
+    'Գէորգ',
+    'Գևորգ',
+    'Գրիգորիս',
+    'Կոստանդին',
+    'Ղազար',
+    'Փավստոս',
+    'Իբն',
+}
+
+SHORT_TOKEN_ALLOWLIST = {
+    'Իբն',
+}
+
 TOPONYM_BIGRAMS = {
     'Նյու Յորք',
     'Երևան Հայաստան',
@@ -61,10 +116,30 @@ def _is_non_person_candidate(candidate: str) -> bool:
         return True
     if tokens[-1] in NON_PERSON_SUFFIXES:
         return True
+    if any(tok in NON_PERSON_TOKENS for tok in tokens):
+        return True
     # Dictionary/meta terms often leak into NER candidates.
-    if any(tok in {'Արաբերեն', 'Պարսկերեն', 'Հայերեն', 'Հայերէն'} for tok in tokens):
+    if any(tok in LANGUAGE_TERMS for tok in tokens):
         return True
     return False
+
+
+def _looks_like_person_candidate(tokens: List[str]) -> bool:
+    if not tokens:
+        return False
+    if any(len(tok) <= 2 and tok not in SHORT_TOKEN_ALLOWLIST for tok in tokens):
+        return False
+    if tokens[0] in KNOWN_GIVEN_NAMES:
+        return True
+    return any(tok.endswith(sfx) for tok in tokens for sfx in PERSON_SUFFIX_HINTS)
+
+
+def _is_lexicon_like_text(normalized_text: str) -> bool:
+    return (
+        'ԲԱՌԱՐԱՆ' in normalized_text
+        and 'Արաբերեն' in normalized_text
+        and 'Պարսկերեն' in normalized_text
+    )
 
 def extract_armenian_names(text: str) -> List[str]:
     """Extract likely Armenian person names with stricter heuristics.
@@ -72,6 +147,7 @@ def extract_armenian_names(text: str) -> List[str]:
     We prefer 2-3 title-cased Armenian tokens and reject headings/boilerplate.
     """
     normalized = re.sub(r'\s+', ' ', text)
+    lexicon_like = _is_lexicon_like_text(normalized)
 
     # Example match: Բաբկէն Չուգասզեան or Գէորգ Դպիր Պալատացի
     candidate_pattern = re.compile(
@@ -90,12 +166,14 @@ def extract_armenian_names(text: str) -> List[str]:
             continue
         if _is_non_person_candidate(cand):
             continue
+        if not _looks_like_person_candidate(tokens):
+            continue
         filtered.append(cand)
 
     names = _unique_preserve_order(filtered)
 
     # Fallback pass for dictionary-like articles where precision filters can be too strict.
-    if len(names) < 3:
+    if len(names) < 3 and not lexicon_like:
         fallback_pattern = re.compile(
             r'\b[Ա-Ֆ][ա-ֆև]{2,24}(?:\s+[Ա-Ֆ][ա-ֆև]{2,24})\b'
         )
@@ -106,6 +184,8 @@ def extract_armenian_names(text: str) -> List[str]:
             if _is_non_person_candidate(cand):
                 continue
             if any(sw in cand.split() for sw in NAME_STOPWORDS):
+                continue
+            if not _looks_like_person_candidate(cand.split()):
                 continue
             names.append(cand)
 

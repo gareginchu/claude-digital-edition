@@ -1,3 +1,8 @@
 node_modules/
 .dist/
+dist/
 .DS_Store
+
+# Transient prebuild output. sync-html.mjs writes here every build; the
+# real sources live in ../pipeline/backmatter/ and ../iiif/manifests/.
+public/

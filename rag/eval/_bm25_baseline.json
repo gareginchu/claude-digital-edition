@@ -1,0 +1,307 @@
+{
+  "label": "bm25",
+  "recall_at_k": 0.789,
+  "k": 5,
+  "hits": 86,
+  "total": 109,
+  "by_source": {
+    "curated": {
+      "hits": 6,
+      "total": 14,
+      "recall_at_k": 0.4286
+    },
+    "programmatic-ms": {
+      "hits": 2,
+      "total": 2,
+      "recall_at_k": 1.0
+    },
+    "programmatic-person": {
+      "hits": 61,
+      "total": 73,
+      "recall_at_k": 0.8356
+    },
+    "programmatic-title": {
+      "hits": 17,
+      "total": 20,
+      "recall_at_k": 0.85
+    }
+  },
+  "misses": [
+    {
+      "question": "Who is the author of the article about the Armenian-Arabic-Persian dictionary?",
+      "expected": "article_010",
+      "got": [
+        "article_018",
+        "article_008",
+        "article_054",
+        "article_016",
+        "article_032"
+      ],
+      "source": "curated"
+    },
+    {
+      "question": "Which articles mention Grigor Narekatsi?",
+      "expected": "article_037",
+      "got": [
+        "article_018",
+        "article_055",
+        "article_019",
+        "article_019",
+        "article_055"
+      ],
+      "source": "curated"
+    },
+    {
+      "question": "What is discussed about Konstantin Erznkatsi's poetry?",
+      "expected": "article_022",
+      "got": [
+        "article_018",
+        "article_001",
+        "article_009",
+        "article_010",
+        "article_044"
+      ],
+      "source": "curated"
+    },
+    {
+      "question": "Which articles cover the Mkhitar Sebastatsi and the Mekhitarist order?",
+      "expected": "article_047",
+      "got": [
+        "article_018",
+        "article_016",
+        "article_008",
+        "article_054",
+        "article_054"
+      ],
+      "source": "curated"
+    },
+    {
+      "question": "Which poet is associated with the Aghtamar monastery?",
+      "expected": "article_009",
+      "got": [
+        "article_018",
+        "article_016",
+        "article_008",
+        "article_054",
+        "article_054"
+      ],
+      "source": "curated"
+    },
+    {
+      "question": "What is discussed in the article on Grigoris Aghtamartsi?",
+      "expected": "article_023",
+      "got": [
+        "article_018",
+        "article_035",
+        "article_035",
+        "article_035",
+        "article_035"
+      ],
+      "source": "curated"
+    },
+    {
+      "question": "Which articles discuss the Sasanian dynasty in Armenia?",
+      "expected": "article_016",
+      "got": [
+        "article_018",
+        "article_008",
+        "article_054",
+        "article_054",
+        "article_035"
+      ],
+      "source": "curated"
+    },
+    {
+      "question": "What is the role of Sirarpi Ter-Nersessian in Armenian art history?",
+      "expected": "article_055",
+      "got": [
+        "article_018",
+        "article_054",
+        "article_035",
+        "article_008",
+        "article_008"
+      ],
+      "source": "curated"
+    },
+    {
+      "question": "What does the article \"ԼԵԶՎԱԲԱՆՈՒԹՅՈՒՆ\" cover?",
+      "expected": "article_003",
+      "got": [
+        "article_018",
+        "article_008",
+        "article_016",
+        "article_009",
+        "article_008"
+      ],
+      "source": "programmatic-title"
+    },
+    {
+      "question": "What does the article \"ԱՐԵՎԵԼԱԳԻՏՈՒԹՅՈՒՆ\" cover?",
+      "expected": "article_011",
+      "got": [
+        "article_018",
+        "article_016",
+        "article_032",
+        "article_035",
+        "article_051"
+      ],
+      "source": "programmatic-title"
+    },
+    {
+      "question": "What does the article \"ՀԱՅ-ԻՐԱՆԱԿԱՆ ԳՐԱԿԱՆ ԱՌՆՉՈՒԹՅՈՒՆՆԵՐ\" cover?",
+      "expected": "article_012",
+      "got": [
+        "article_018",
+        "article_014",
+        "article_018",
+        "article_026",
+        "article_026"
+      ],
+      "source": "programmatic-title"
+    },
+    {
+      "question": "Which article in the corpus discusses Գէորգ Դպիր Պալատեցու?",
+      "expected": "article_002",
+      "got": [
+        "article_018",
+        "article_037",
+        "article_037",
+        "article_037",
+        "article_037"
+      ],
+      "source": "programmatic-person"
+    },
+    {
+      "question": "Which article in the corpus discusses Մովսէս Խորենացի?",
+      "expected": "article_004",
+      "got": [
+        "article_018",
+        "article_016",
+        "article_008",
+        "article_054",
+        "article_054"
+      ],
+      "source": "programmatic-person"
+    },
+    {
+      "question": "Which article in the corpus discusses Գէորգ Դպիր?",
+      "expected": "article_006",
+      "got": [
+        "article_018",
+        "article_008",
+        "article_037",
+        "article_037",
+        "article_037"
+      ],
+      "source": "programmatic-person"
+    },
+    {
+      "question": "Which article in the corpus discusses Գրիգորիս Աղթամարցու?",
+      "expected": "article_006",
+      "got": [
+        "article_018",
+        "article_008",
+        "article_054",
+        "article_054",
+        "article_022"
+      ],
+      "source": "programmatic-person"
+    },
+    {
+      "question": "Which article in the corpus discusses Կոստանդին Երզնկացին?",
+      "expected": "article_006",
+      "got": [
+        "article_018",
+        "article_008",
+        "article_054",
+        "article_054",
+        "article_035"
+      ],
+      "source": "programmatic-person"
+    },
+    {
+      "question": "Which article in the corpus discusses Գրիգորիս Աղթամարցի?",
+      "expected": "article_009",
+      "got": [
+        "article_018",
+        "article_023",
+        "article_022",
+        "article_022",
+        "article_008"
+      ],
+      "source": "programmatic-person"
+    },
+    {
+      "question": "Which article in the corpus discusses Մկրտիչ Էմին?",
+      "expected": "article_014",
+      "got": [
+        "article_018",
+        "article_008",
+        "article_054",
+        "article_054",
+        "article_035"
+      ],
+      "source": "programmatic-person"
+    },
+    {
+      "question": "Which article in the corpus discusses Թավրիզի Արամյան?",
+      "expected": "article_025",
+      "got": [
+        "article_018",
+        "article_008",
+        "article_054",
+        "article_054",
+        "article_035"
+      ],
+      "source": "programmatic-person"
+    },
+    {
+      "question": "Which article in the corpus discusses Գրիգոր Նարեկացի?",
+      "expected": "article_037",
+      "got": [
+        "article_018",
+        "article_008",
+        "article_054",
+        "article_054",
+        "article_035"
+      ],
+      "source": "programmatic-person"
+    },
+    {
+      "question": "Which article in the corpus discusses Ղազար Մարգարյանը?",
+      "expected": "article_046",
+      "got": [
+        "article_018",
+        "article_047",
+        "article_008",
+        "article_054",
+        "article_054"
+      ],
+      "source": "programmatic-person"
+    },
+    {
+      "question": "Which article in the corpus discusses Եղիայիս Աստուածատուրեան?",
+      "expected": "article_046",
+      "got": [
+        "article_018",
+        "article_050",
+        "article_008",
+        "article_048",
+        "article_054"
+      ],
+      "source": "programmatic-person"
+    },
+    {
+      "question": "Which article in the corpus discusses Մկրտիչ Ավգերյանը?",
+      "expected": "article_052",
+      "got": [
+        "article_018",
+        "article_008",
+        "article_054",
+        "article_054",
+        "article_035"
+      ],
+      "source": "programmatic-person"
+    }
+  ]
+}
